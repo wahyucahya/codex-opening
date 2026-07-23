@@ -53,13 +53,27 @@ export async function POST(req: NextRequest) {
     }
 
     if (action === 'update-settings') {
-      const { target, sound } = payload;
+      const { target, sound, particles } = payload;
+      const updatePayload: any = { total_target: target, sound_enabled: sound };
+
+      if (particles !== undefined) {
+        updatePayload.particles_enabled = particles;
+      }
 
       // Update pengaturan ke tabel settings di Supabase
-      const { error } = await supabaseServer
+      let { error } = await supabaseServer
         .from('settings')
-        .update({ total_target: target, sound_enabled: sound })
+        .update(updatePayload)
         .eq('id', 'default');
+
+      if (error && error.code === '42703') { // 42703 = undefined_column (particles_enabled doesn't exist yet)
+        // Fallback: update target & sound only
+        const fallbackResult = await supabaseServer
+          .from('settings')
+          .update({ total_target: target, sound_enabled: sound })
+          .eq('id', 'default');
+        error = fallbackResult.error;
+      }
 
       if (error) {
         // Jika error karena tabel settings belum ada

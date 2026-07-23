@@ -1,0 +1,339 @@
+'use client';
+
+interface Logo2Props {
+  size?: number;
+}
+
+export default function Logo2({ size = 360 }: Logo2Props) {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <svg
+        width="100%"
+        height="100%"
+        viewBox="0 0 1080 1080"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        xmlSpace="preserve"
+        style={{
+          fillRule: 'evenodd',
+          clipRule: 'evenodd',
+          strokeLinejoin: 'round',
+          strokeMiterlimit: 2,
+        }}
+      >
+        <rect id="konsep-logo-only" x="0" y="0" width="1080" height="1080" style={{ fill: 'none' }} />
+        
+        <g id="konsep-logo-only1">
+          
+          {/* 1. Main Logo Text - "CODEX" at the top */}
+          <g className="logo2-wordmark" style={{ transformOrigin: '540px 300px' }}>
+            <g transform="matrix(1.411858,0,0,1.411858,-402.898315,30.151668)">
+              <g transform="matrix(5.244419,0,0,5.244419,-353.189356,-633.344365)">
+                <g transform="matrix(0.918006,0,0,0.918006,-270.023453,64.521158)">
+                  <g transform="matrix(0.1893,0,0,0.1893,164.164799,70.353736)">
+                    <path d="M1854.332,562.681C1848.704,573.886 1840.678,582.482 1830.253,588.466C1819.829,594.45 1807.417,597.442 1793.016,597.442L1740.884,597.442C1745.906,596.633 1750.706,595.712 1755.287,594.679C1762.162,593.129 1768.543,591.328 1774.441,589.281C1799.788,580.482 1816.196,567.135 1824.408,549.618C1824.573,549.268 1824.735,548.914 1824.893,548.557C1827.769,542.006 1829.206,533.324 1829.206,522.512C1829.206,511.681 1827.748,503.002 1824.832,496.476C1822.027,490.195 1817.961,485.585 1812.634,482.645C1840.524,493.31 1853.97,520.674 1854.332,562.681Z" style={{ fill: 'url(#_Linear1_logo2)' }} />
+                  </g>
+                  <g transform="matrix(0.1893,0,0,0.1893,164.164799,70.353736)">
+                    <path d="M1740.884,597.442L1740.884,447.574L1793.016,447.574C1807.425,447.574 1819.831,450.571 1830.235,456.565C1840.639,462.558 1848.663,471.149 1854.306,482.339C1859.95,493.529 1862.772,506.92 1862.772,522.512C1862.772,538.085 1859.959,551.474 1854.332,562.681C1853.97,520.674 1840.524,493.31 1812.634,482.645C1812.424,482.53 1812.212,482.417 1811.999,482.306C1806.36,479.386 1799.403,477.926 1791.128,477.926L1774.441,477.926L1774.441,567.089L1791.584,567.089C1799.708,567.089 1806.571,565.638 1812.174,562.736C1817.472,559.993 1821.549,555.62 1824.408,549.618C1816.196,567.135 1799.788,580.482 1774.441,589.281C1768.543,591.328 1762.162,593.129 1755.287,594.679C1750.706,595.712 1745.906,596.633 1740.884,597.442Z" style={{ fill: 'url(#_Linear2_logo2)' }} />
+                  </g>
+                </g>
+                <g transform="matrix(0.173778,0,0,0.173778,-119.319258,129.106278)">
+                  <path d="M1577.349,461.563C1590.441,472.108 1596.05,484.994 1597.271,491.406C1598.491,484.994 1605.731,470.795 1617.192,461.563C1622.863,456.995 1629.4,453.52 1636.807,451.141C1644.214,448.763 1652.252,447.574 1660.922,447.574C1673.841,447.574 1685.518,450.474 1695.951,456.275C1706.383,462.074 1714.651,470.562 1720.756,481.736C1681.406,462.422 1653.931,463.506 1638.81,485.815C1637.181,487.456 1635.789,489.319 1634.637,491.406C1633.065,494.251 1632.006,497.468 1631.458,501.056L1563.083,501.056C1562.535,497.468 1561.476,494.251 1559.904,491.406C1558.333,488.561 1556.318,486.131 1553.86,484.115C1551.402,482.099 1548.544,480.561 1545.285,479.503C1542.027,478.445 1538.436,477.916 1534.513,477.916C1527.4,477.916 1521.248,479.677 1516.057,483.2C1510.865,486.722 1506.882,491.809 1504.108,498.46C1514.381,465.297 1539.383,453.867 1577.349,461.563Z" style={{ fill: 'url(#_Linear3_logo2)' }} />
+                </g>
+                <g transform="matrix(0.173778,0,0,0.173778,-119.319258,129.106278)">
+                  <path d="M1720.756,481.736C1726.859,492.91 1729.911,506.533 1729.911,522.606C1729.911,538.563 1726.896,552.116 1720.867,563.267C1714.837,574.416 1706.618,582.899 1696.211,588.716C1685.802,594.533 1674.039,597.442 1660.922,597.442C1650.996,597.442 1642.181,595.901 1634.476,592.821C1626.771,589.74 1620.059,585.752 1614.748,580.441C1601.416,567.109 1598.24,558.05 1597.271,553.599C1633.834,582.546 1676.947,582.586 1690.346,547.137C1693.177,540.51 1694.593,532.333 1694.593,522.606C1694.593,513.16 1693.206,505.112 1690.433,498.46C1687.659,491.809 1683.676,486.722 1678.484,483.2C1673.293,479.677 1667.141,477.916 1660.028,477.916C1656.105,477.916 1652.514,478.445 1649.256,479.503C1645.997,480.561 1643.139,482.099 1640.681,484.115C1640.026,484.652 1639.402,485.219 1638.81,485.815C1653.931,463.506 1681.406,462.422 1720.756,481.736Z" style={{ fill: 'url(#_Linear4_logo2)' }} />
+                </g>
+                <g transform="matrix(0.173778,0,0,0.173778,-119.319258,129.106278)">
+                  <path d="M1597.271,553.599C1596.301,558.05 1592.935,567.963 1579.793,580.441C1574.346,585.613 1567.77,589.74 1560.065,592.821C1552.36,595.901 1543.545,597.442 1533.619,597.442C1520.502,597.442 1508.739,594.533 1498.33,588.716C1532.034,589.166 1554.865,577.19 1562.378,547.708C1562.73,546.506 1563.015,545.256 1563.232,543.959L1631.309,543.959C1631.907,547.533 1633.017,550.746 1634.638,553.599C1636.259,556.45 1638.323,558.881 1640.831,560.89C1643.338,562.898 1646.208,564.435 1649.441,565.501C1652.675,566.567 1656.253,567.099 1660.176,567.099C1667.175,567.099 1673.245,565.429 1678.386,562.088C1683.528,558.748 1687.514,553.764 1690.346,547.137C1676.947,582.586 1633.834,582.546 1597.271,553.599Z" style={{ fill: 'url(#_Linear5_logo2)' }} />
+                </g>
+                <g transform="matrix(0.173778,0,0,0.173778,-119.319258,129.106278)">
+                  <path d="M1498.33,588.716C1487.923,582.899 1479.704,574.416 1473.674,563.267C1467.645,552.116 1464.63,538.563 1464.63,522.606C1464.63,506.533 1467.682,492.91 1473.786,481.736C1479.89,470.562 1488.159,462.074 1498.591,456.275C1509.024,450.474 1520.7,447.574 1533.619,447.574C1542.289,447.574 1550.327,448.763 1557.734,451.141C1565.141,453.52 1571.678,456.995 1577.349,461.563C1539.383,453.867 1514.381,465.297 1504.108,498.46C1501.335,505.112 1499.948,513.16 1499.948,522.606C1499.948,532.333 1501.364,540.51 1504.195,547.137C1507.027,553.764 1511.013,558.748 1516.155,562.088C1521.296,565.429 1527.366,567.099 1534.365,567.099C1538.288,567.099 1541.866,566.567 1545.1,565.501C1548.333,564.435 1551.203,562.898 1553.71,560.89C1556.218,558.881 1558.283,556.45 1559.903,553.599C1560.936,551.781 1561.761,549.818 1562.378,547.708C1554.865,577.19 1532.034,589.166 1498.33,588.716Z" style={{ fill: 'url(#_Linear6_logo2)' }} />
+                </g>
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1873.745,483.267L1873.745,465.42C1873.745,455.571 1881.742,447.574 1891.592,447.574L1972.156,447.574C1947.399,471.512 1914.911,483.124 1875.231,483.267C1874.736,483.268 1874.241,483.268 1873.745,483.267Z" style={{ fill: 'url(#_Linear7_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1972.156,447.574L1972.156,465.42C1972.156,475.27 1964.159,483.267 1954.31,483.267L1875.231,483.267C1914.911,483.124 1947.399,471.512 1972.156,447.574Z" style={{ fill: 'url(#_Linear8_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1875.318,538.789C1874.346,537.82 1873.745,536.48 1873.745,535L1873.745,510.015C1873.745,507.06 1876.144,504.661 1879.099,504.661L1966.802,504.661C1968.542,504.661 1970.09,505.493 1971.068,506.78C1961.912,527.13 1929.412,537.552 1875.318,538.789Z" style={{ fill: 'url(#_Linear9_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1971.068,506.78C1971.751,507.679 1972.156,508.8 1972.156,510.015L1972.156,535C1972.156,537.955 1969.757,540.354 1966.802,540.354L1879.099,540.354C1877.623,540.354 1876.287,539.756 1875.318,538.789C1929.412,537.552 1961.912,527.13 1971.068,506.78Z" style={{ fill: 'url(#_Linear10_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1873.745,597.442L1873.745,579.595C1873.745,569.745 1881.742,561.748 1891.592,561.748L1972.156,561.748C1953.876,585.751 1921.083,597.353 1874.818,597.442C1874.461,597.442 1874.103,597.442 1873.745,597.442Z" style={{ fill: 'url(#_Linear11_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1972.156,561.748L1972.156,579.595C1972.156,589.445 1964.159,597.442 1954.31,597.442L1874.818,597.442C1921.083,597.353 1953.876,585.751 1972.156,561.748Z" style={{ fill: 'url(#_Linear12_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M1983.129,445.972L2013.346,445.972C2022.326,445.972 2035.077,453.262 2041.803,462.242L2086.461,521.868L2055.101,563.738C2068.776,531.574 2041.907,487.785 1983.129,445.972Z" style={{ fill: 'url(#_Linear13_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2055.101,563.738L2041.803,581.493C2035.077,590.473 2022.326,597.764 2013.346,597.764C2030.449,580.901 2035.117,561.706 2026.392,540L2039.973,521.868L1983.129,445.972C2041.907,487.785 2068.776,531.574 2055.101,563.738Z" style={{ fill: 'url(#_Linear14_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2013.346,597.764L1983.129,597.764L2026.392,540C2035.117,561.706 2030.449,580.901 2013.346,597.764Z" style={{ fill: 'url(#_Linear15_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2149.273,445.972L2092.429,521.868C2088.407,490.614 2108.665,465.655 2149.273,445.972Z" style={{ fill: 'url(#_Linear16_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2092.429,521.868L2069.185,490.833L2090.598,462.242C2097.324,453.262 2110.075,445.972 2119.056,445.972L2149.273,445.972C2108.665,465.655 2088.407,490.614 2092.429,521.868Z" style={{ fill: 'url(#_Linear17_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2092.429,521.868L2149.273,597.764C2114.073,579.966 2095.396,554.542 2092.429,521.868Z" style={{ fill: 'url(#_Linear18_logo2)' }} />
+              </g>
+              <g transform="matrix(0.911365,0,0,0.911365,-978.949574,43.743089)">
+                <path d="M2149.273,597.764L2119.056,597.764C2110.075,597.764 2097.324,590.473 2090.598,581.493L2069.185,552.902L2092.429,521.868C2095.396,554.542 2114.073,579.966 2149.273,597.764Z" style={{ fill: 'url(#_Linear19_logo2)' }} />
+              </g>
+            </g>
+          </g>
+
+          {/* 2. Subtitle Text - "COMPUTING AND DATA EXHIBITION" at the bottom */}
+          <g className="logo2-subtitle" style={{ transformOrigin: '540px 900px' }}>
+            <g transform="matrix(2.453073,0,0,2.510141,-946.382112,451.494898)">
+              <text
+                x="425.824px"
+                y="183.006px"
+                style={{
+                  fontFamily: "'Montserrat-Bold', 'Montserrat', sans-serif",
+                  fontWeight: 700,
+                  fontSize: '13.95px',
+                  fill: 'url(#_Linear20_logo2)',
+                }}
+              >
+                C
+                <tspan
+                  x="439.327px 454.589px 471.399px 484.916px 499.229px 511.338px 519.401px 534.16px 548.403px 555.839px 570.012px 584.771px 599.781px 607.217px 622.088px 635.773px 647.393px 661.566px 669.002px 681.752px 694.893px 709.652px 717.716px 731.875px 739.938px 752.047px 760.11px 775.371px"
+                  y="183.006px"
+                >
+                  OMPUTING AND DATA EXHIBITION
+                </tspan>
+              </text>
+            </g>
+          </g>
+
+          {/* 3. Central Logo (Icon) */}
+          <g className="logo2-center" style={{ transformOrigin: '540px 540px' }}>
+            <g transform="matrix(0.557701,0,0,0.557701,201.900213,74.621612)">
+              <g transform="matrix(1,0,0,1,-5.211423,0)">
+                <g transform="matrix(1,0,0,1,-12.912949,0)">
+                  <path d="M392.138,634.489C296.018,574.525 252.031,479.279 305.597,287.064C372.692,219.414 434.882,168.713 434.882,168.713C605.788,403.33 354.059,399.463 354.059,548.726C354.059,585.754 370.569,611.892 392.138,634.489Z" style={{ fill: 'url(#_Linear21_logo2)' }} />
+                </g>
+                <g transform="matrix(1,0,0,1,-12.912949,0)">
+                  <path d="M392.138,634.489C453.58,698.86 556.07,734.498 434.882,911.287C434.882,911.287 141.709,686.035 141.709,540.281C141.709,468.776 227.016,366.295 305.597,287.064C252.031,479.279 296.018,574.525 392.138,634.489Z" style={{ fill: 'url(#_Linear22_logo2)' }} />
+                </g>
+              </g>
+              <g transform="matrix(1,0,0,-1,137.689325,1080)">
+                <g transform="matrix(-1,0,0,-1,1092.912949,1080)">
+                  <path d="M392.138,634.489C296.018,574.525 252.031,479.279 305.597,287.064C372.692,219.414 434.882,168.713 434.882,168.713C605.788,403.33 354.059,399.463 354.059,548.726C354.059,585.754 370.569,611.892 392.138,634.489Z" style={{ fill: 'url(#_Linear23_logo2)' }} />
+                </g>
+                <g transform="matrix(-1,0,0,-1,1092.912949,1080)">
+                  <path d="M392.138,634.489C453.58,698.86 556.07,734.498 434.882,911.287C434.882,911.287 141.709,686.035 141.709,540.281C141.709,468.776 227.016,366.295 305.597,287.064C252.031,479.279 296.018,574.525 392.138,634.489Z" style={{ fill: 'url(#_Linear24_logo2)' }} />
+                </g>
+              </g>
+              <g transform="matrix(0.946448,-0.946448,0.946448,0.946448,-438.698504,545.964271)">
+                <path d="M658.551,486.859L658.551,610.902C658.551,633.722 640.024,652.249 617.203,652.249L493.161,652.249C470.34,652.249 451.813,633.722 451.813,610.902L451.813,486.859C451.813,464.038 470.34,445.511 493.161,445.511L617.203,445.511C640.024,445.511 658.551,464.038 658.551,486.859Z" style={{ fill: 'url(#_Linear25_logo2)' }} />
+              </g>
+            </g>
+          </g>
+
+        </g>
+        
+        <defs>
+          <linearGradient id="_Linear1_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-63.487853,115.118584,-115.118584,-63.487853,1815.881,482.645475)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.54" style={{ stopColor: 'rgb(45,61,110)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear2_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(100.889058,-131.179729,131.179729,100.889058,1740.883636,597.441597)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear3_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-207.636967,-1.246925,1.246925,-207.636967,1720.755558,480.516216)">
+            <stop offset="0" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+            <stop offset="0.55" style={{ stopColor: 'rgb(49,67,115)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear4_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(128.240966,-61.514974,61.514974,128.240966,1597.27054,555.331725)">
+            <stop offset="0" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear5_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(121.608163,-44.768971,44.768971,121.608163,1498.330348,588.728348)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.54" style={{ stopColor: 'rgb(45,61,110)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear6_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.88155,-141.154511,141.154511,16.88155,1504.108032,588.728348)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear7_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(69.218438,22.492119,-22.492119,69.218438,1873.745038,447.573837)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.48" style={{ stopColor: 'rgb(76,103,146)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear8_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-49.749884,35.693213,-35.693213,-49.749884,1972.156265,447.573837)">
+            <stop offset="0" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear9_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(84.9568,-38.154514,38.154514,84.9568,1873.745038,538.789211)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear10_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-100.789962,23.555734,-23.555734,-100.789962,1975.607635,515.233477)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear11_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(97.322685,-35.693213,35.693213,97.322685,1873.745038,597.441597)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.48" style={{ stopColor: 'rgb(76,103,146)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear12_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(67.450151,-29.010881,29.010881,67.450151,1903.617572,597.441597)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.58" style={{ stopColor: 'rgb(71,96,141)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear13_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-71.132173,0,-0,-71.132173,2086.460882,521.867854)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.58" style={{ stopColor: 'rgb(71,96,141)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear14_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(46.912408,2.474138,-2.474138,46.912408,2018.052655,519.393717)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.58" style={{ stopColor: 'rgb(71,96,141)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear15_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(44.911639,-49.295114,49.295114,44.911639,1983.128819,597.441597)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.58" style={{ stopColor: 'rgb(71,96,141)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear16_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-56.84401,73.334804,-73.334804,-56.84401,2149.272763,445.97165)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear17_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(38.876938,-75.896205,75.896205,38.876938,2075.470292,521.867854)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear18_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-53.059697,-75.896205,75.896205,-53.059697,2145.48845,597.764059)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear19_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(0.501832,75.896205,-75.896205,0.501832,2091.926921,521.867854)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear20_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(359.117552,0,0,350.953056,426.367697,178.123916)">
+            <stop offset="0" style={{ stopColor: 'var(--color-white)', stopOpacity: 1 }} />
+            <stop offset="0.3" style={{ stopColor: 'var(--color-pistachio)', stopOpacity: 1 }} />
+            <stop offset="0.6" style={{ stopColor: 'var(--color-white)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'var(--color-carolina-blue)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear21_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(46.869499,-473.914763,473.914763,46.869499,388.428615,634.488758)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.42" style={{ stopColor: 'rgb(67,84,129)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(143,172,202)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear22_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-290.821686,-604.835311,604.835311,-290.821686,432.530738,911.28713)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.49" style={{ stopColor: 'rgb(75,102,146)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear23_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(46.869499,-473.914763,473.914763,46.869499,388.428615,634.488758)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.42" style={{ stopColor: 'rgb(67,84,129)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(143,172,202)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear24_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-290.821686,-604.835311,604.835311,-290.821686,432.530738,911.28713)">
+            <stop offset="0" style={{ stopColor: 'rgb(32,44,96)', stopOpacity: 1 }} />
+            <stop offset="0.49" style={{ stopColor: 'rgb(75,102,146)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(89,121,162)', stopOpacity: 1 }} />
+          </linearGradient>
+          <linearGradient id="_Linear25_logo2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(-145.384739,145.384739,-145.384739,-145.384739,609.313892,494.748412)">
+            <stop offset="0" style={{ stopColor: 'rgb(248,202,7)', stopOpacity: 1 }} />
+            <stop offset="0.53" style={{ stopColor: 'rgb(253,173,2)', stopOpacity: 1 }} />
+            <stop offset="1" style={{ stopColor: 'rgb(255,162,0)', stopOpacity: 1 }} />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <style jsx>{`
+        @keyframes revealCenter {
+          0% {
+            transform: scale(0) rotate(-70deg);
+            opacity: 0;
+            filter: drop-shadow(0 0 0px rgba(175, 208, 110, 0));
+          }
+          65% {
+            transform: scale(1.18) rotate(8deg);
+            opacity: 0.9;
+            filter: drop-shadow(0 0 25px rgba(175, 208, 110, 0.6));
+          }
+          100% {
+            transform: scale(1) rotate(0deg);
+            opacity: 1;
+            filter: drop-shadow(0 0 15px rgba(175, 208, 110, 0.3));
+          }
+        }
+
+        @keyframes revealWordmark {
+          0% {
+            transform: translateY(-40px) scale(0.9);
+            opacity: 0;
+            filter: blur(8px) drop-shadow(0 0 0px rgba(255, 255, 255, 0));
+          }
+          100% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+            filter: blur(0px) drop-shadow(0 0 10px rgba(135, 174, 206, 0.2));
+          }
+        }
+
+        @keyframes revealSubtitle {
+          0% {
+            transform: translateY(30px);
+            opacity: 0;
+            letter-spacing: 4px;
+          }
+          100% {
+            transform: translateY(0);
+            opacity: 1;
+            letter-spacing: normal;
+          }
+        }
+
+        .logo2-center {
+          animation: revealCenter 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .logo2-wordmark {
+          animation: revealWordmark 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: 0.5s;
+          opacity: 0;
+        }
+
+        .logo2-subtitle {
+          animation: revealSubtitle 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation-delay: 0.9s;
+          opacity: 0;
+        }
+      `}</style>
+    </div>
+  );
+}

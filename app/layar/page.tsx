@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAttendanceCount } from '@/hooks/useAttendanceCount';
 import FillLogo from '@/components/FillLogo';
+import Logo2 from '@/components/Logo2';
 import ParticleOverlay from '@/components/ParticleOverlay';
 import confetti from 'canvas-confetti';
 import { Volume2, VolumeX, Users, Trophy } from 'lucide-react';
@@ -11,6 +12,7 @@ import { supabase } from '@/lib/supabaseClient';
 export default function LayarPage() {
   const [totalTarget, setTotalTarget] = useState(100);
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [particlesEnabled, setParticlesEnabled] = useState(true);
   const [recentCheckIns, setRecentCheckIns] = useState<string[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
 
@@ -35,6 +37,7 @@ export default function LayarPage() {
         if (data) {
           setTotalTarget(data.total_target);
           setSoundEnabled(data.sound_enabled);
+          setParticlesEnabled(data.particles_enabled !== false);
         }
       } catch (err) {
         console.error('Gagal mengambil data pengaturan dari Supabase settings table:', err);
@@ -54,6 +57,7 @@ export default function LayarPage() {
             const newSettings = payload.new as any;
             setTotalTarget(newSettings.total_target);
             setSoundEnabled(newSettings.sound_enabled);
+            setParticlesEnabled(newSettings.particles_enabled !== false);
           }
         }
       )
@@ -170,7 +174,7 @@ export default function LayarPage() {
         overflow: 'hidden',
       }}
     >
-      <ParticleOverlay active={percent >= 100 && ready} />
+      <ParticleOverlay active={percent >= 100 && ready && particlesEnabled} />
 
       {/* Background Grid - Delft Blue / White tint */}
       <div
@@ -299,7 +303,17 @@ export default function LayarPage() {
           zIndex: 2,
         }}
       >
-        <div style={{ textAlign: 'center', maxWidth: 900, width: '100%' }}>
+        <div
+          style={{
+            textAlign: 'center',
+            maxWidth: 900,
+            width: '100%',
+            opacity: percent >= 100 && ready ? 0 : 1,
+            transform: percent >= 100 && ready ? 'translateY(-30px) scale(0.95)' : 'translateY(0) scale(1)',
+            transition: 'all 1000ms cubic-bezier(0.16, 1, 0.3, 1)',
+            pointerEvents: percent >= 100 && ready ? 'none' : 'auto',
+          }}
+        >
           <h1
             style={{
               fontFamily: 'var(--font-heading)',
@@ -374,11 +388,72 @@ export default function LayarPage() {
             }}
           />
 
-          <FillLogo percent={percent} size={360} />
+          {/* Logo transition block: cross-fades FillLogo to Logo2 at 100% with scale & blur effects */}
+          <div
+            style={{
+              position: 'relative',
+              width: 360,
+              height: 360,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transform: percent >= 100 && ready ? 'scale(1.5)' : 'scale(1)',
+              transition: 'transform 1200ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+            }}
+          >
+            {/* FillLogo (Liquid Progress) */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: percent >= 100 && ready ? 0 : 1,
+                transform: percent >= 100 && ready ? 'scale(0.8) rotate(-15deg)' : 'scale(1) rotate(0deg)',
+                filter: percent >= 100 && ready ? 'blur(12px)' : 'none',
+                transition: 'all 1000ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                pointerEvents: percent >= 100 && ready ? 'none' : 'auto',
+              }}
+            >
+              <FillLogo percent={percent} size={360} />
+            </div>
+
+            {/* Logo2 (Complete brand logo with text & entrance animations) */}
+            <div
+              style={{
+                position: 'absolute',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: percent >= 100 && ready ? 1 : 0,
+                transform: percent >= 100 && ready ? 'scale(1) rotate(0deg)' : 'scale(1.25) rotate(15deg)',
+                filter: percent >= 100 && ready ? 'none' : 'blur(12px)',
+                transition: 'all 1000ms cubic-bezier(0.34, 1.56, 0.64, 1)',
+                pointerEvents: percent >= 100 && ready ? 'auto' : 'none',
+              }}
+            >
+              {percent >= 100 && ready && <Logo2 size={360} />}
+            </div>
+          </div>
         </div>
 
         {/* Counts & Percentage Meter */}
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 16,
+            opacity: percent >= 100 && ready ? 0 : 1,
+            transform: percent >= 100 && ready ? 'translateY(30px) scale(0.95)' : 'translateY(0) scale(1)',
+            transition: 'all 1000ms cubic-bezier(0.16, 1, 0.3, 1)',
+            pointerEvents: percent >= 100 && ready ? 'none' : 'auto',
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, color: 'var(--color-white)' }}>
             <span style={{ fontFamily: 'var(--font-heading)', fontSize: '5rem', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
               {count}

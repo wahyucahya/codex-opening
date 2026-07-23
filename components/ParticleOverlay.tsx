@@ -44,7 +44,8 @@ const PARTICLE_SOURCES = [
   '/particel/monitor.png',
   '/particel/robot-talking.png',
   '/particel/server.png',
-  '/particel/social.png'
+  '/particel/social.png',
+  '/particel/upb.png',
 ];
 
 const GLOW_COLORS = [
@@ -83,6 +84,7 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
 
     let animationId: number;
     let spawnTimer = 0;
+    let activeStartTime = 0;
 
     // Handle Resize
     const resizeCanvas = () => {
@@ -98,13 +100,8 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
     resizeCanvas();
 
     // Helper to create a single particle
-    const createParticle = (
-      x: number,
-      y: number,
-      isExplosion = false,
-      type: 'image' | 'glow' | null = null
-    ): Particle => {
-      const finalType = type || (Math.random() < 0.75 ? 'image' : 'glow');
+    const createParticle = (x: number, y: number): Particle => {
+      const finalType = Math.random() < 0.75 ? 'image' : 'glow';
       let img: HTMLImageElement | undefined;
       let color: string | undefined;
 
@@ -114,35 +111,19 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
         color = GLOW_COLORS[Math.floor(Math.random() * GLOW_COLORS.length)];
       }
 
-      // Physics settings based on explosion vs continuous float
-      let vx = 0;
-      let vy = 0;
-      let friction = 0.99;
-      let gravity = -0.01 - Math.random() * 0.02; // slow drift upward default
+      // Floating up from bottom
+      const vx = (Math.random() - 0.5) * 1.5;
+      const vy = -1.5 - Math.random() * 2.5;
+      const friction = 0.99;
+      const gravity = -0.01 - Math.random() * 0.02; // slow drift upward
 
-      if (isExplosion) {
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 12 + 4; // High initial speed
-        vx = Math.cos(angle) * speed;
-        vy = Math.sin(angle) * speed;
-        friction = 0.95; // fast damping
-        gravity = 0.05 + Math.random() * 0.05; // slight fall down after explosion
-      } else {
-        // Floating up from bottom
-        vx = (Math.random() - 0.5) * 1.5;
-        vy = -1.5 - Math.random() * 2.5;
-        friction = 0.99;
-      }
-
-      const size = isExplosion ? 10 : 0; // grow size from zero or small
+      const size = 0; // grow size from zero
       const targetSize = finalType === 'image'
-        ? (Math.random() * 25 + 25) // 25-50px for images
+        ? (Math.random() * 16 + 16) // 25-50px for images
         : (Math.random() * 12 + 6);  // 6-18px for glow dots
 
       const maxOpacity = Math.random() * 0.3 + 0.7; // 0.7 - 1.0 max opacity
-      const fadeSpeed = isExplosion
-        ? 0.005 + Math.random() * 0.008
-        : 0.002 + Math.random() * 0.004;
+      const fadeSpeed = 0.002 + Math.random() * 0.004;
 
       return {
         type: finalType,
@@ -154,7 +135,7 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
         vy,
         size,
         targetSize,
-        opacity: isExplosion ? maxOpacity : 0, // fade-in for rising particles
+        opacity: 0, // fade-in for rising particles
         maxOpacity,
         rotation: Math.random() * Math.PI * 2,
         spin: (Math.random() - 0.5) * 0.05,
@@ -167,50 +148,29 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
       };
     };
 
-    // Explosion blast function
-    const triggerExplosion = () => {
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-
-      // Spawn 80 particles in a burst
-      const burstCount = 80;
-      for (let i = 0; i < burstCount; i++) {
-        particlesRef.current.push(createParticle(centerX, centerY, true));
-      }
-    };
-
-    // Trigger initial explosion once active turns true
-    let wasActive = false;
-
     // Simulation Loop
     const tick = (timestamp: number) => {
       // Clear canvas
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
 
-      // Handle transition to active (trigger blast)
-      if (activeRef.current && !wasActive) {
-        triggerExplosion();
-        wasActive = true;
-      }
-
-      if (!activeRef.current) {
-        wasActive = false;
-      }
-
-      // Generate continuous particles if active
+      // Track how long the overlay has been active
       if (activeRef.current) {
-        spawnTimer++;
-        if (spawnTimer % 6 === 0) { // spawn every ~100ms (6 frames at 60fps)
-          // Spawn at random bottom screen locations
-          const bottomX = Math.random() * window.innerWidth;
-          const bottomY = window.innerHeight + 30;
-          particlesRef.current.push(createParticle(bottomX, bottomY, false));
+        if (activeStartTime === 0) {
+          activeStartTime = Date.now();
+        }
+      } else {
+        activeStartTime = 0;
+      }
 
-          // Occasionally spawn from the center logo area
-          if (Math.random() < 0.4) {
-            const centerX = window.innerWidth / 2 + (Math.random() - 0.5) * 100;
-            const centerY = window.innerHeight / 2 + (Math.random() - 0.5) * 100;
-            particlesRef.current.push(createParticle(centerX, centerY, false));
+      // Generate continuous bottom particles if active, after a 3-second delay
+      if (activeRef.current && activeStartTime > 0) {
+        const elapsed = Date.now() - activeStartTime;
+        if (elapsed >= 1000) {
+          spawnTimer++;
+          if (spawnTimer % 6 === 0) { // spawn every ~100ms
+            const bottomX = Math.random() * window.innerWidth;
+            const bottomY = window.innerHeight + 30;
+            particlesRef.current.push(createParticle(bottomX, bottomY));
           }
         }
       }
@@ -290,7 +250,7 @@ export default function ParticleOverlay({ active }: ParticleOverlayProps) {
         position: 'fixed',
         inset: 0,
         pointerEvents: 'none',
-        zIndex: 999,
+        zIndex: 1,
       }}
     />
   );

@@ -19,6 +19,7 @@ import {
 export default function AdminDashboardPage() {
   const [totalTarget, setTotalTarget] = useState(100);
   const [soundEnabled, setSoundEnabled] = useState(false);
+  const [particlesEnabled, setParticlesEnabled] = useState(true);
   const [simulateName, setSimulateName] = useState('');
   const [loading, setLoading] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
@@ -56,6 +57,7 @@ export default function AdminDashboardPage() {
         if (data) {
           setTotalTarget(data.total_target);
           setSoundEnabled(data.sound_enabled);
+          setParticlesEnabled(data.particles_enabled !== false);
         }
 
         setAuthChecked(true);
@@ -80,7 +82,7 @@ export default function AdminDashboardPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           action: 'update-settings',
-          payload: { target: totalTarget, sound: soundEnabled },
+          payload: { target: totalTarget, sound: soundEnabled, particles: particlesEnabled },
         }),
       });
 
@@ -384,6 +386,37 @@ export default function AdminDashboardPage() {
                 >
                   {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
                   <span>{soundEnabled ? 'Aktif' : 'Mute'}</span>
+                </button>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: 16 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                  <span style={{ fontSize: 14, fontWeight: 700, textTransform: 'uppercase' }}>Partikel Layar</span>
+                  <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.5)' }}>
+                    Nyalakan ikon teknologi melayang setelah 100%.
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setParticlesEnabled(!particlesEnabled)}
+                  style={{
+                    padding: '8px 14px',
+                    borderRadius: 'var(--radius-sm)',
+                    background: particlesEnabled ? 'var(--color-pistachio)' : 'transparent',
+                    border: '2px solid var(--color-white)',
+                    color: particlesEnabled ? 'var(--color-bg-dark)' : 'var(--color-white)',
+                    cursor: 'pointer',
+                    fontWeight: 700,
+                    fontSize: 12,
+                    textTransform: 'uppercase',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 6,
+                  }}
+                >
+                  {particlesEnabled ? <Zap size={14} /> : <VolumeX size={14} />}
+                  <span>{particlesEnabled ? 'Aktif' : 'Mute'}</span>
                 </button>
               </div>
 

@@ -38,12 +38,13 @@ create table if not exists settings (
   id text primary key default 'default',
   total_target integer default 100,
   sound_enabled boolean default false,
+  particles_enabled boolean default true,
   updated_at timestamptz default now()
 );
 
 -- Masukkan data awal jika belum ada
-insert into settings (id, total_target, sound_enabled)
-values ('default', 100, false)
+insert into settings (id, total_target, sound_enabled, particles_enabled)
+values ('default', 100, false, true)
 on conflict (id) do nothing;
 
 -- Aktifkan RLS
