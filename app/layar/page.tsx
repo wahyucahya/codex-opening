@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAttendanceCount } from '@/hooks/useAttendanceCount';
 import FillLogo from '@/components/FillLogo';
+import ParticleOverlay from '@/components/ParticleOverlay';
 import confetti from 'canvas-confetti';
 import { Volume2, VolumeX, Users, Trophy } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
@@ -169,6 +170,8 @@ export default function LayarPage() {
         overflow: 'hidden',
       }}
     >
+      <ParticleOverlay active={percent >= 100 && ready} />
+
       {/* Background Grid - Delft Blue / White tint */}
       <div
         style={{
