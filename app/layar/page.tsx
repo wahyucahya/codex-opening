@@ -6,7 +6,7 @@ import FillLogo from '@/components/FillLogo';
 import Logo2 from '@/components/Logo2';
 import ParticleOverlay from '@/components/ParticleOverlay';
 import confetti from 'canvas-confetti';
-import { Volume2, VolumeX, Users, Trophy } from 'lucide-react';
+import { Volume2, VolumeX, Users, Trophy, Maximize } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function LayarPage() {
@@ -15,6 +15,32 @@ export default function LayarPage() {
   const [particlesEnabled, setParticlesEnabled] = useState(true);
   const [recentCheckIns, setRecentCheckIns] = useState<string[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(!!document.fullscreenElement);
+    };
+    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullscreenChange);
+    document.addEventListener('mozfullscreenchange', handleFullscreenChange);
+    document.addEventListener('MSFullscreenChange', handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('mozfullscreenchange', handleFullscreenChange);
+      document.removeEventListener('MSFullscreenChange', handleFullscreenChange);
+    };
+  }, []);
+
+  const enterFullscreen = () => {
+    const el = document.documentElement as any;
+    const requestMethod = el.requestFullscreen || el.webkitRequestFullscreen || el.mozRequestFullScreen || el.msRequestFullscreen;
+    if (requestMethod) {
+      requestMethod.call(el);
+    }
+  };
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -287,10 +313,68 @@ export default function LayarPage() {
             </button>
           </div>
 
-          <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.5px', color: 'var(--color-white)' }}>
-            SUPABASE REALTIME: <span style={{ color: ready ? 'var(--color-pistachio)' : '#FF5252' }}>{ready ? 'CONNECTED ✓' : 'CONNECTING...'}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <div style={{ fontSize: 13, fontWeight: 700, letterSpacing: '0.5px', color: 'var(--color-white)' }}>
+              SUPABASE REALTIME: <span style={{ color: ready ? 'var(--color-pistachio)' : '#FF5252' }}>{ready ? 'CONNECTED ✓' : 'CONNECTING...'}</span>
+            </div>
+            {!isFullscreen && (
+              <button
+                onClick={enterFullscreen}
+                className="header-btn"
+                style={{
+                  padding: '10px 18px',
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'var(--color-card-dark)',
+                  border: '2px solid var(--color-white)',
+                  boxShadow: '3px 3px 0px var(--color-white)',
+                  color: 'var(--color-white)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 8,
+                  fontSize: 13,
+                  cursor: 'pointer',
+                  fontWeight: 700,
+                  textTransform: 'uppercase',
+                  transition: 'all 0.15s ease-out',
+                }}
+              >
+                <Maximize size={16} />
+                <span>Fullscreen</span>
+              </button>
+            )}
           </div>
         </div>
+      )}
+
+      {/* Floating Fullscreen button - Hanya muncul jika bukan admin dan tidak sedang fullscreen */}
+      {!isAdmin && !isFullscreen && (
+        <button
+          onClick={enterFullscreen}
+          className="header-btn"
+          style={{
+            position: 'absolute',
+            top: 32,
+            right: 40,
+            padding: '10px 18px',
+            borderRadius: 'var(--radius-sm)',
+            background: 'var(--color-card-dark)',
+            border: '2px solid var(--color-white)',
+            boxShadow: '3px 3px 0px var(--color-white)',
+            color: 'var(--color-white)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            fontSize: 13,
+            cursor: 'pointer',
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            zIndex: 100,
+            transition: 'all 0.15s ease-out',
+          }}
+        >
+          <Maximize size={16} />
+          <span>Fullscreen</span>
+        </button>
       )}
 
       {/* Main Container */}
@@ -524,7 +608,6 @@ export default function LayarPage() {
           ))}
         </div>
       )}
-
       {/* CSS Animations */}
       <style jsx global>{`
         @keyframes slideUp {

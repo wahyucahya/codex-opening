@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import ConfirmModal from '@/components/ConfirmModal';
 import {
   Settings,
   Users,
@@ -23,6 +24,7 @@ export default function AdminDashboardPage() {
   const [simulateName, setSimulateName] = useState('');
   const [loading, setLoading] = useState(false);
   const [authChecked, setAuthChecked] = useState(false);
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
@@ -128,13 +130,11 @@ export default function AdminDashboardPage() {
     }
   };
 
-  const handleResetCount = async () => {
-    const confirmReset = window.confirm(
-      'PERINGATAN KERAS!\n\nApakah Anda yakin ingin menghapus SEMUA data click? Tindakan ini tidak bisa dibatalkan dan count di layar utama akan kembali menjadi 0 secara instan!'
-    );
+  const handleResetCount = () => {
+    setIsConfirmOpen(true);
+  };
 
-    if (!confirmReset) return;
-
+  const executeResetCount = async () => {
     setMessage('');
     setError('');
     setLoading(true);
@@ -581,6 +581,17 @@ export default function AdminDashboardPage() {
           </button>
         </section>
       </div>
+
+      <ConfirmModal
+        isOpen={isConfirmOpen}
+        onClose={() => setIsConfirmOpen(false)}
+        onConfirm={executeResetCount}
+        title="Konfirmasi Reset"
+        message="PERINGATAN KERAS! Apakah Anda yakin ingin menghapus SEMUA data click? Tindakan ini tidak bisa dibatalkan dan hitungan di layar utama akan kembali menjadi 0 secara instan."
+        confirmText="Reset Sekarang"
+        cancelText="Batal"
+        type="danger"
+      />
 
       <style jsx>{`
         .logout-btn:hover {

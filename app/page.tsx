@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { ScreenShare, UserCheck, Settings, Database } from 'lucide-react';
+import { ScreenShare, UserCheck, Settings, Database, QrCode } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -211,10 +211,65 @@ export default function Home() {
                     color: 'var(--color-white)',
                   }}
                 >
-                  Halaman Peserta
+                  Halaman Partisipasi
                 </h3>
                 <p style={{ margin: 0, fontSize: 14, color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.5 }}>
-                  Simulasi halaman HP peserta. Scan QR atau klik tombol untuk memicu pengisian logo dan efek suara secara instan.
+                  Simulasi halaman HP peserta. Scan QR atau klik tombol untuk ikut berpartisipasi menyalakan logo CODEX secara realtime.
+                </p>
+              </div>
+            </div>
+          </Link>
+
+          {/* Card 3: Tampilan Kode QR (Dedicated QR Page) */}
+          <Link href="/qr" style={{ textDecoration: 'none', color: 'inherit' }}>
+            <div
+              className="neobrutalist-card"
+              style={{
+                background: 'var(--color-card-dark)',
+                border: '2.5px solid var(--color-white)',
+                borderRadius: 'var(--radius-md)',
+                padding: '32px 24px',
+                textAlign: 'left',
+                transition: 'var(--transition-smooth)',
+                cursor: 'pointer',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 16,
+                height: '100%',
+                boxShadow: 'var(--shadow-organic)',
+              }}
+            >
+              <div
+                style={{
+                  width: 48,
+                  height: 48,
+                  borderRadius: 'var(--radius-sm)',
+                  background: 'var(--color-carolina-blue)',
+                  border: '2px solid var(--color-white)',
+                  color: 'var(--color-bg-dark)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  boxShadow: '2px 2px 0px var(--color-white)',
+                }}
+              >
+                <QrCode size={24} />
+              </div>
+              <div>
+                <h3
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    margin: '0 0 8px 0',
+                    fontSize: 20,
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    color: 'var(--color-white)',
+                  }}
+                >
+                  QR Code Partisipasi
+                </h3>
+                <p style={{ margin: 0, fontSize: 14, color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.5 }}>
+                  Tampilan khusus kode QR dalam ukuran besar untuk diproyeksikan ke layar agar dipindai oleh peserta agar ikut menyalakan logo CODEX.
                 </p>
               </div>
             </div>
