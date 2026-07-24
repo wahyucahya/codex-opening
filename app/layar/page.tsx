@@ -488,40 +488,42 @@ export default function LayarPage() {
       </div>
 
       {/* Recent Activity Toast Feed (Absolute Bottom Left) */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: 32,
-          left: 40,
-          display: 'flex',
-          flexDirection: 'column-reverse',
-          gap: 12,
-          zIndex: 10,
-        }}
-      >
-        {recentCheckIns.map((toast, i) => (
-          <div
-            key={i}
-            style={{
-              padding: '12px 20px',
-              borderRadius: 'var(--radius-sm)',
-              background: 'var(--color-card-dark)',
-              border: '2px solid var(--color-white)',
-              boxShadow: '3px 3px 0px var(--color-white)',
-              fontSize: 14,
-              fontWeight: 700,
-              color: 'var(--color-white)',
-              animation: 'slideUp 0.3s ease-out forwards',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8,
-            }}
-          >
-            <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-pistachio)', border: '1px solid var(--color-white)' }} />
-            {toast}
-          </div>
-        ))}
-      </div>
+      {percent < 100 && (
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 32,
+            left: 40,
+            display: 'flex',
+            flexDirection: 'column-reverse',
+            gap: 12,
+            zIndex: 10,
+          }}
+        >
+          {recentCheckIns.map((toast, i) => (
+            <div
+              key={i}
+              style={{
+                padding: '12px 20px',
+                borderRadius: 'var(--radius-sm)',
+                background: 'var(--color-card-dark)',
+                border: '2px solid var(--color-white)',
+                boxShadow: '3px 3px 0px var(--color-white)',
+                fontSize: 14,
+                fontWeight: 700,
+                color: 'var(--color-white)',
+                animation: 'slideUp 0.3s ease-out forwards',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 8,
+              }}
+            >
+              <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-pistachio)', border: '1px solid var(--color-white)' }} />
+              {toast}
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* CSS Animations */}
       <style jsx global>{`

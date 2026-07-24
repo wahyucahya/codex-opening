@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
-import { Sparkles, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
+import { Bot, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 /**
@@ -123,7 +123,7 @@ export default function HadirPage({ params }: { params: { token: string } }) {
             transition: 'all 0.3s ease',
           }}
         >
-          {status === 'done' ? <CheckCircle2 size={30} /> : <Sparkles size={30} />}
+          {status === 'done' ? <CheckCircle2 size={30} /> : <Bot size={30} />}
         </div>
         
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
