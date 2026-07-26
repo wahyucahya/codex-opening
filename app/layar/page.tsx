@@ -9,11 +9,19 @@ import confetti from 'canvas-confetti';
 import { Volume2, VolumeX, Users, Trophy, Maximize } from 'lucide-react';
 import { supabase } from '@/lib/supabaseClient';
 
+interface CheckInToast {
+  id: string;
+  message: string;
+  emoji: string;
+  isExiting: boolean;
+  animationType: string;
+}
+
 export default function LayarPage() {
   const [totalTarget, setTotalTarget] = useState(100);
   const [soundEnabled, setSoundEnabled] = useState(false);
   const [particlesEnabled, setParticlesEnabled] = useState(true);
-  const [recentCheckIns, setRecentCheckIns] = useState<string[]>([]);
+  const [recentCheckIns, setRecentCheckIns] = useState<CheckInToast[]>([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
@@ -133,16 +141,48 @@ export default function LayarPage() {
       
     let message = '';
     if (cleanToken === 'umum' || !cleanToken) {
-      message = `Seseorang menyalakan CODEX! ⚡`;
+      message = `Seseorang menyalakan CODEX!`;
     } else {
       let displayName = cleanToken;
       try {
         displayName = decodeURIComponent(cleanToken);
       } catch (e) {}
-      message = `"${displayName}" menyalakan CODEX! ⚡`;
+      message = `"${displayName}" menyalakan CODEX!`;
     }
     
-    setRecentCheckIns((prev) => [message, ...prev].slice(0, 5));
+    const id = Math.random().toString(36).substring(2, 9);
+    const emojis = [
+      '/emoji/feelings.png',
+      '/emoji/laughing.png',
+      '/emoji/robot.png',
+      '/emoji/robot%20(1).png'
+    ];
+    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
+
+    const animationTypes = ['spin', 'bounce', 'swing', 'flip'];
+    const randomAnimation = animationTypes[Math.floor(Math.random() * animationTypes.length)];
+
+    const newToast: CheckInToast = {
+      id,
+      message,
+      emoji: randomEmoji,
+      isExiting: false,
+      animationType: randomAnimation
+    };
+
+    setRecentCheckIns((prev) => [newToast, ...prev].slice(0, 5));
+
+    // Setelah 4 detik, tandai untuk exit animation
+    setTimeout(() => {
+      setRecentCheckIns((prev) =>
+        prev.map((t) => (t.id === id ? { ...t, isExiting: true } : t))
+      );
+    }, 4000);
+
+    // Setelah 4.4 detik (400ms durasi animasi exit), hapus dari list
+    setTimeout(() => {
+      setRecentCheckIns((prev) => prev.filter((t) => t.id !== id));
+    }, 4400);
   };
 
   const { count, percent, ready } = useAttendanceCount(totalTarget, handleNewAttendance);
@@ -584,32 +624,135 @@ export default function LayarPage() {
             zIndex: 10,
           }}
         >
-          {recentCheckIns.map((toast, i) => (
+          {recentCheckIns.map((toast) => (
             <div
-              key={i}
+              key={toast.id}
               style={{
-                padding: '12px 20px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'var(--color-card-dark)',
-                border: '2px solid var(--color-white)',
-                boxShadow: '3px 3px 0px var(--color-white)',
-                fontSize: 14,
-                fontWeight: 700,
-                color: 'var(--color-white)',
-                animation: 'slideUp 0.3s ease-out forwards',
                 display: 'flex',
                 alignItems: 'center',
-                gap: 8,
+                justifyContent: 'center',
+                animation: toast.isExiting 
+                  ? 'toastExit 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards' 
+                  : `toastEnter${toast.animationType.charAt(0).toUpperCase() + toast.animationType.slice(1)} 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards`,
+                transformOrigin: 'bottom left',
+                boxSizing: 'border-box',
+                perspective: '1000px',
               }}
             >
-              <div style={{ width: 8, height: 8, borderRadius: '50%', background: 'var(--color-pistachio)', border: '1px solid var(--color-white)' }} />
-              {toast}
+              <img 
+                src={toast.emoji} 
+                alt="emoji" 
+                style={{ 
+                  width: 40, 
+                  height: 40, 
+                  objectFit: 'contain',
+                  flexShrink: 0
+                }} 
+              />
             </div>
           ))}
         </div>
       )}
       {/* CSS Animations */}
       <style jsx global>{`
+        @keyframes toastEnterSpin {
+          0% {
+            opacity: 0;
+            transform: translateY(40px) scale(0) rotate(-270deg);
+            max-height: 0px;
+            margin-bottom: -12px;
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1) rotate(0deg);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+        }
+        @keyframes toastEnterBounce {
+          0% {
+            opacity: 0;
+            transform: translateY(60px) scale(0.3);
+            max-height: 0px;
+            margin-bottom: -12px;
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-20px) scale(1.4);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+          75% {
+            transform: translateY(10px) scale(0.85);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+        }
+        @keyframes toastEnterSwing {
+          0% {
+            opacity: 0;
+            transform: translateX(-50px) scale(0.5) rotate(-30deg);
+            max-height: 0px;
+            margin-bottom: -12px;
+          }
+          40% {
+            transform: translateX(15px) scale(1.1) rotate(15deg);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+          70% {
+            transform: translateX(-5px) scale(0.95) rotate(-10deg);
+          }
+          100% {
+            opacity: 1;
+            transform: translateX(0) scale(1) rotate(0deg);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+        }
+        @keyframes toastEnterFlip {
+          0% {
+            opacity: 0;
+            transform: translateY(30px) rotateY(90deg) scale(0.5);
+            max-height: 0px;
+            margin-bottom: -12px;
+          }
+          50% {
+            opacity: 1;
+            transform: translateY(-10px) rotateY(-20deg) scale(1.2);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) rotateY(0deg) scale(1);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+        }
+        @keyframes toastExit {
+          0% {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+            max-height: 40px;
+            margin-bottom: 0px;
+          }
+          30% {
+            opacity: 1;
+            transform: scale(1.2) rotate(-20deg);
+          }
+          100% {
+            opacity: 0;
+            transform: scale(0) rotate(540deg) translateY(-80px);
+            max-height: 0px;
+            margin-bottom: -12px;
+            overflow: hidden;
+          }
+        }
         @keyframes slideUp {
           from {
             opacity: 0;
