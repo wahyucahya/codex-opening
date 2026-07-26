@@ -3,7 +3,7 @@
 interface FillLogoProps {
   /** Persentase 0-100, seberapa penuh logo terisi dari bawah */
   percent: number;
-  size?: number;
+  size?: number | string;
 }
 
 /**

@@ -1,7 +1,7 @@
 'use client';
 
 interface Logo2Props {
-  size?: number;
+  size?: number | string;
 }
 
 export default function Logo2({ size = 360 }: Logo2Props) {

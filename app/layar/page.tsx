@@ -235,10 +235,11 @@ export default function LayarPage() {
         background: 'var(--color-bg-dark)',
         color: 'var(--color-beige)',
         fontFamily: 'var(--font-body)',
-        padding: 40,
+        padding: 24,
         position: 'relative',
         overflow: 'hidden',
-      }}
+        '--logo-size': 'min(42vh, 360px)',
+      } as any}
     >
       <ParticleOverlay active={percent >= 100 && ready && particlesEnabled} />
 
@@ -415,14 +416,20 @@ export default function LayarPage() {
         </button>
       )}
 
-      {/* Main Container */}
+      {/* Main Container constrained to presentation aspect ratio and safe height */}
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: 40,
+          justifyContent: 'center',
+          gap: 'clamp(16px, 4vh, 32px)',
           zIndex: 2,
+          width: '100%',
+          maxWidth: '1200px',
+          maxHeight: '82vh', // Safe maximum height to avoid vertical overflow
+          margin: 'auto',
+          boxSizing: 'border-box',
         }}
       >
         <div
@@ -439,17 +446,18 @@ export default function LayarPage() {
           <h1
             style={{
               fontFamily: 'var(--font-heading)',
-              fontSize: 'clamp(2.5rem, 6vw, 3.8rem)',
-              fontWeight: 700,
+              fontSize: 'clamp(2.2rem, 5.5vh, 3.5rem)',
+              fontWeight: 900,
               margin: 0,
               color: 'var(--color-white)',
               letterSpacing: '-1px',
               textTransform: 'uppercase',
+              lineHeight: 1.1,
             }}
           >
             Pembukaan <span style={{ whiteSpace: 'nowrap' }}>CODEX-2</span>
           </h1>
-          <p style={{ opacity: 0.8, fontSize: '1rem', marginTop: 8, fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-carolina-blue)' }}>
+          <p style={{ opacity: 0.8, fontSize: 'clamp(0.85rem, 1.8vh, 1rem)', marginTop: 6, fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', color: 'var(--color-carolina-blue)' }}>
             Nyalakan Energi Teknologi Bersama
           </p>
         </div>
@@ -461,7 +469,7 @@ export default function LayarPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: 40,
+            padding: 'clamp(20px, 4vh, 40px)',
             borderRadius: '50%',
           }}
         >
@@ -470,8 +478,8 @@ export default function LayarPage() {
             className="orbit-ring"
             style={{
               position: 'absolute',
-              width: 440,
-              height: 440,
+              width: 'calc(1.22 * var(--logo-size))',
+              height: 'calc(1.22 * var(--logo-size))',
               borderRadius: '50%',
               border: '2px dashed rgba(255, 255, 255, 0.05)',
               pointerEvents: 'none',
@@ -482,8 +490,8 @@ export default function LayarPage() {
           <div
             style={{
               position: 'absolute',
-              width: 400,
-              height: 400,
+              width: 'calc(1.11 * var(--logo-size))',
+              height: 'calc(1.11 * var(--logo-size))',
               borderRadius: '50%',
               background: 'radial-gradient(circle at center, rgba(135, 174, 206, 0.25) 0%, rgba(175, 208, 110, 0.15) 50%, transparent 70%)',
               filter: 'blur(50px)',
@@ -499,8 +507,8 @@ export default function LayarPage() {
             className="core-glow"
             style={{
               position: 'absolute',
-              width: 280,
-              height: 280,
+              width: 'calc(0.77 * var(--logo-size))',
+              height: 'calc(0.77 * var(--logo-size))',
               borderRadius: '50%',
               background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.15) 0%, rgba(175, 208, 110, 0.35) 40%, rgba(248, 202, 7, 0.15) 75%, transparent 100%)',
               filter: 'blur(30px)',
@@ -514,8 +522,8 @@ export default function LayarPage() {
           <div
             style={{
               position: 'relative',
-              width: 360,
-              height: 360,
+              width: 'var(--logo-size)',
+              height: 'var(--logo-size)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -539,7 +547,7 @@ export default function LayarPage() {
                 pointerEvents: percent >= 100 && ready ? 'none' : 'auto',
               }}
             >
-              <FillLogo percent={percent} size={360} />
+              <FillLogo percent={percent} size="var(--logo-size)" />
             </div>
 
             {/* Logo2 (Complete brand logo with text & entrance animations) */}
@@ -558,7 +566,7 @@ export default function LayarPage() {
                 pointerEvents: percent >= 100 && ready ? 'auto' : 'none',
               }}
             >
-              {percent >= 100 && ready && <Logo2 size={360} />}
+              {percent >= 100 && ready && <Logo2 size="var(--logo-size)" />}
             </div>
           </div>
         </div>
@@ -569,7 +577,7 @@ export default function LayarPage() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: 16,
+            gap: 'clamp(8px, 1.5vh, 16px)',
             opacity: percent >= 100 && ready ? 0 : 1,
             transform: percent >= 100 && ready ? 'translateY(30px) scale(0.95)' : 'translateY(0) scale(1)',
             transition: 'all 1000ms cubic-bezier(0.16, 1, 0.3, 1)',
@@ -577,10 +585,10 @@ export default function LayarPage() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, color: 'var(--color-white)' }}>
-            <span style={{ fontFamily: 'var(--font-heading)', fontSize: '5rem', fontWeight: 700, lineHeight: 1, letterSpacing: '-2px' }}>
+            <span style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(3.5rem, 8vh, 5.2rem)', fontWeight: 900, lineHeight: 1, letterSpacing: '-2px' }}>
               {count}
             </span>
-            <span style={{ fontSize: '2rem', opacity: 0.5, fontWeight: 700 }}>
+            <span style={{ fontSize: 'clamp(1.5rem, 3vh, 2.2rem)', opacity: 0.5, fontWeight: 700 }}>
               / {totalTarget}
             </span>
           </div>
