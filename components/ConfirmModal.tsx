@@ -94,14 +94,13 @@ export default function ConfirmModal({
       <div
         style={{
           background: 'var(--color-card-dark)',
-          border: '3px solid var(--color-white)',
+          border: `1.5px solid ${accentColor}`,
           borderRadius: 'var(--radius-md)',
           width: '100%',
           maxWidth: 440,
           padding: 28,
-          boxShadow: `6px 6px 0px ${shadowColor}`,
+          boxShadow: `0 20px 50px rgba(0, 0, 0, 0.85), 0 0 25px ${accentColor}30`,
           position: 'relative',
-          transform: 'rotate(-0.5deg)',
         }}
         className="confirm-modal-box"
         onClick={(e) => e.stopPropagation()}
@@ -133,32 +132,32 @@ export default function ConfirmModal({
         {/* Modal Content layout */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {/* Header Section */}
-          <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+          <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
             <div
               style={{
-                background: accentColor,
-                border: '2px solid var(--color-white)',
-                borderRadius: 'var(--radius-sm)',
+                background: `${accentColor}15`,
+                border: `1.5px solid ${accentColor}`,
+                borderRadius: '50%',
                 padding: 10,
-                color: 'var(--color-bg-dark)',
+                color: accentColor,
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                boxShadow: '2px 2px 0px var(--color-white)',
+                boxShadow: `0 0 10px ${accentColor}30`,
               }}
             >
-              <Icon size={24} />
+              <Icon size={22} />
             </div>
-            <div style={{ flex: 1, paddingTop: 4 }}>
+            <div style={{ flex: 1 }}>
               <h3
                 style={{
                   fontFamily: 'var(--font-heading)',
                   fontSize: 20,
-                  fontWeight: 700,
+                  fontWeight: 900,
                   margin: 0,
                   color: 'var(--color-white)',
                   textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
+                  letterSpacing: '0.8px',
                   lineHeight: 1.2,
                 }}
               >
@@ -172,7 +171,7 @@ export default function ConfirmModal({
             style={{
               fontSize: 15,
               lineHeight: 1.6,
-              color: 'rgba(245, 243, 218, 0.8)',
+              color: 'rgba(245, 243, 218, 0.75)',
               fontWeight: 400,
               whiteSpace: 'pre-wrap',
             }}
@@ -194,20 +193,24 @@ export default function ConfirmModal({
               style={{
                 padding: '10px 18px',
                 borderRadius: 'var(--radius-sm)',
-                background: 'transparent',
-                border: '2px solid var(--color-white)',
-                color: 'var(--color-white)',
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: 'rgba(255, 255, 255, 0.7)',
                 fontSize: 14,
                 fontWeight: 700,
                 cursor: 'pointer',
-                transition: 'var(--transition-fast)',
+                transition: 'all 0.2s ease',
                 textTransform: 'uppercase',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)';
+                e.currentTarget.style.color = '#fff';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'transparent';
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
+                e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
               }}
             >
               {cancelText}
@@ -222,22 +225,22 @@ export default function ConfirmModal({
                 padding: '10px 20px',
                 borderRadius: 'var(--radius-sm)',
                 background: accentColor,
-                border: '2px solid var(--color-white)',
+                border: 'none',
                 color: 'var(--color-bg-dark)',
                 fontSize: 14,
                 fontWeight: 700,
                 cursor: 'pointer',
-                boxShadow: '2px 2px 0px var(--color-white)',
-                transition: 'var(--transition-fast)',
+                boxShadow: `0 0 12px ${accentColor}40`,
+                transition: 'all 0.2s ease',
                 textTransform: 'uppercase',
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-white)';
+                e.currentTarget.style.filter = 'brightness(1.15)';
+                e.currentTarget.style.boxShadow = `0 0 20px ${accentColor}70`;
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-white)';
+                e.currentTarget.style.filter = 'none';
+                e.currentTarget.style.boxShadow = `0 0 12px ${accentColor}40`;
               }}
             >
               {confirmText}

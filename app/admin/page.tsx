@@ -304,282 +304,267 @@ export default function AdminDashboardPage() {
           }}
         >
           {/* Card 1: Pengaturan Target & Suara */}
-          <section
-            className="admin-card"
-            style={{
-              background: 'var(--color-card-dark)',
-              border: '2.5px solid var(--color-white)',
-              borderRadius: 'var(--radius-md)',
-              padding: 28,
-              boxShadow: 'var(--shadow-organic)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 20,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Settings size={20} />
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 18,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  margin: 0,
-                  color: 'var(--color-white)',
-                }}
-              >
-                Pengaturan Layar
-              </h2>
+          <div className="ticket-wrapper">
+            <div className="ticket" style={{ '--t-accent': 'var(--color-carolina-blue)', '--t-accent-glow': 'rgba(135, 174, 206, 0.4)' } as any}>
+              <div className="t-main" style={{ minHeight: '380px', display: 'flex', flexDirection: 'column' }}>
+                <div className="t-content" style={{ display: 'flex', flexDirection: 'column', gap: 20, flex: 1 }}>
+                  <div className="t-header" style={{ marginBottom: 0 }}>
+                    <div className="t-logo">
+                      <Settings size={20} style={{ color: 'var(--color-carolina-blue)' }} />
+                      CONFIG
+                    </div>
+                    <div className="t-type">SYSTEM SETTINGS</div>
+                  </div>
+
+                  <form onSubmit={handleSaveSettings} style={{ display: 'flex', flexDirection: 'column', gap: 16, flex: 1 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                      <label style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: 'var(--t-text-muted)', letterSpacing: '0.5px' }}>Target Click</label>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <Users size={18} style={{ color: 'rgba(255,255,255,0.4)' }} />
+                        <input
+                          type="number"
+                          min="1"
+                          value={totalTarget}
+                          onChange={(e) => setTotalTarget(Math.max(1, parseInt(e.target.value) || 1))}
+                          style={{
+                            flex: 1,
+                            padding: '10px 12px',
+                            background: 'rgba(255, 255, 255, 0.03)',
+                            border: '1.5px solid rgba(255, 255, 255, 0.12)',
+                            borderRadius: 'var(--radius-sm)',
+                            color: 'var(--color-white)',
+                            fontSize: 15,
+                            fontWeight: 700,
+                            outline: 'none',
+                            transition: 'all 0.2s ease',
+                          }}
+                          onFocus={(e) => {
+                            e.target.style.border = '1.5px solid var(--color-carolina-blue)';
+                            e.target.style.boxShadow = '0 0 10px rgba(135, 174, 206, 0.2)';
+                          }}
+                          onBlur={(e) => {
+                            e.target.style.border = '1.5px solid rgba(255, 255, 255, 0.12)';
+                            e.target.style.boxShadow = 'none';
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 0' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase' }}>Suara Chime Realtime</span>
+                        <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', lineHeight: 1.3 }}>
+                          Efek suara di proyektor saat tap.
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setSoundEnabled(!soundEnabled)}
+                        style={{
+                          padding: '8px 14px',
+                          borderRadius: 'var(--radius-sm)',
+                          background: soundEnabled ? 'rgba(175, 208, 110, 0.12)' : 'rgba(255, 255, 255, 0.02)',
+                          border: soundEnabled ? '1.5px solid var(--color-pistachio)' : '1.5px solid rgba(255, 255, 255, 0.15)',
+                          color: soundEnabled ? 'var(--color-pistachio)' : 'rgba(255, 255, 255, 0.6)',
+                          cursor: 'pointer',
+                          fontWeight: 700,
+                          fontSize: 12,
+                          textTransform: 'uppercase',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          transition: 'all 0.2s ease',
+                          boxShadow: soundEnabled ? '0 0 10px rgba(175, 208, 110, 0.15)' : 'none',
+                        }}
+                      >
+                        {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
+                        <span>{soundEnabled ? 'Aktif' : 'Mute'}</span>
+                      </button>
+                    </div>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '4px 0', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: 12 }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+                        <span style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase' }}>Partikel Layar</span>
+                        <span style={{ fontSize: 11, color: 'rgba(255, 255, 255, 0.4)', lineHeight: 1.3 }}>
+                          Ikon teknologi melayang setelah 100%.
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => setParticlesEnabled(!particlesEnabled)}
+                        style={{
+                          padding: '8px 14px',
+                          borderRadius: 'var(--radius-sm)',
+                          background: particlesEnabled ? 'rgba(175, 208, 110, 0.12)' : 'rgba(255, 255, 255, 0.02)',
+                          border: particlesEnabled ? '1.5px solid var(--color-pistachio)' : '1.5px solid rgba(255, 255, 255, 0.15)',
+                          color: particlesEnabled ? 'var(--color-pistachio)' : 'rgba(255, 255, 255, 0.6)',
+                          cursor: 'pointer',
+                          fontWeight: 700,
+                          fontSize: 12,
+                          textTransform: 'uppercase',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: 6,
+                          transition: 'all 0.2s ease',
+                          boxShadow: particlesEnabled ? '0 0 10px rgba(175, 208, 110, 0.15)' : 'none',
+                        }}
+                      >
+                        {particlesEnabled ? <Zap size={14} /> : <VolumeX size={14} />}
+                        <span>{particlesEnabled ? 'Aktif' : 'Mute'}</span>
+                      </button>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="cyber-button"
+                      style={{ width: '100%', marginTop: 'auto' }}
+                    >
+                      <div className="cyber-inner" style={{ background: 'linear-gradient(180deg, var(--color-carolina-blue), #000)', borderBottomColor: '#2b446a' }}>
+                        <span>Simpan Pengaturan</span>
+                      </div>
+                    </button>
+                  </form>
+                </div>
+                <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                  <div className="t-perf-line" />
+                </div>
+              </div>
+              <div className="t-stub">
+                <div className="t-barcode-container">
+                  <div className="t-barcode" />
+                  <div className="t-barcode-id">CODEX-2-CONFIG</div>
+                </div>
+                <div className="t-admit">
+                  <div className="t-admit-text">SYS</div>
+                  <div className="t-admit-num" style={{ fontSize: '1.8em', color: 'var(--color-carolina-blue)' }}>CFG</div>
+                </div>
+              </div>
             </div>
-
-            <form onSubmit={handleSaveSettings} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <label style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase' }}>Target Click</label>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                  <Users size={18} style={{ color: 'rgba(255,255,255,0.4)' }} />
-                  <input
-                    type="number"
-                    min="1"
-                    value={totalTarget}
-                    onChange={(e) => setTotalTarget(Math.max(1, parseInt(e.target.value) || 1))}
-                    style={{
-                      flex: 1,
-                      padding: '10px 12px',
-                      background: 'var(--color-bg-dark)',
-                      border: '2px solid var(--color-white)',
-                      borderRadius: 'var(--radius-sm)',
-                      color: 'var(--color-white)',
-                      fontSize: 15,
-                      fontWeight: 700,
-                      outline: 'none',
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0' }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, textTransform: 'uppercase' }}>Suara Chime Realtime</span>
-                  <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.5)' }}>
-                    Nyalakan efek suara di proyektor saat ada tap.
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setSoundEnabled(!soundEnabled)}
-                  style={{
-                    padding: '8px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: soundEnabled ? 'var(--color-pistachio)' : 'transparent',
-                    border: '2px solid var(--color-white)',
-                    color: soundEnabled ? 'var(--color-bg-dark)' : 'var(--color-white)',
-                    cursor: 'pointer',
-                    fontWeight: 700,
-                    fontSize: 12,
-                    textTransform: 'uppercase',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                  }}
-                >
-                  {soundEnabled ? <Volume2 size={14} /> : <VolumeX size={14} />}
-                  <span>{soundEnabled ? 'Aktif' : 'Mute'}</span>
-                </button>
-              </div>
-
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 0', borderTop: '1px solid rgba(255, 255, 255, 0.08)', paddingTop: 16 }}>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  <span style={{ fontSize: 14, fontWeight: 700, textTransform: 'uppercase' }}>Partikel Layar</span>
-                  <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.5)' }}>
-                    Nyalakan ikon teknologi melayang setelah 100%.
-                  </span>
-                </div>
-
-                <button
-                  type="button"
-                  onClick={() => setParticlesEnabled(!particlesEnabled)}
-                  style={{
-                    padding: '8px 14px',
-                    borderRadius: 'var(--radius-sm)',
-                    background: particlesEnabled ? 'var(--color-pistachio)' : 'transparent',
-                    border: '2px solid var(--color-white)',
-                    color: particlesEnabled ? 'var(--color-bg-dark)' : 'var(--color-white)',
-                    cursor: 'pointer',
-                    fontWeight: 700,
-                    fontSize: 12,
-                    textTransform: 'uppercase',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 6,
-                  }}
-                >
-                  {particlesEnabled ? <Zap size={14} /> : <VolumeX size={14} />}
-                  <span>{particlesEnabled ? 'Aktif' : 'Mute'}</span>
-                </button>
-              </div>
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="action-btn"
-                style={{
-                  width: '100%',
-                  padding: '14px 18px',
-                  fontSize: 14,
-                  fontWeight: 700,
-                  fontFamily: 'var(--font-heading)',
-                  textTransform: 'uppercase',
-                  borderRadius: 'var(--radius-sm)',
-                  border: '2px solid var(--color-white)',
-                  color: 'var(--color-bg-dark)',
-                  background: 'var(--color-carolina-blue)',
-                  cursor: loading ? 'not-allowed' : 'pointer',
-                  boxShadow: '3px 3px 0px var(--color-white)',
-                  transition: 'all 0.15s ease-out',
-                }}
-              >
-                Simpan Pengaturan
-              </button>
-            </form>
-          </section>
+          </div>
 
           {/* Card 2: Simulasi Tap Peserta */}
-          <section
-            className="admin-card"
-            style={{
-              background: 'var(--color-card-dark)',
-              border: '2.5px solid var(--color-white)',
-              borderRadius: 'var(--radius-md)',
-              padding: 28,
-              boxShadow: 'var(--shadow-organic)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 20,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <Zap size={20} />
-              <h2
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 18,
-                  fontWeight: 700,
-                  textTransform: 'uppercase',
-                  margin: 0,
-                  color: 'var(--color-white)',
-                }}
-              >
-                Simulasi Click
-              </h2>
+          <div className="ticket-wrapper">
+            <div className="ticket" style={{ '--t-accent': 'var(--color-pistachio)', '--t-accent-glow': 'rgba(175, 208, 110, 0.4)' } as any}>
+              <div className="t-main" style={{ minHeight: '380px', display: 'flex', flexDirection: 'column' }}>
+                <div className="t-content" style={{ display: 'flex', flexDirection: 'column', gap: 20, flex: 1 }}>
+                  <div className="t-header" style={{ marginBottom: 0 }}>
+                    <div className="t-logo">
+                      <Zap size={20} style={{ color: 'var(--color-pistachio)' }} />
+                      SIMULATE
+                    </div>
+                    <div className="t-type">TEST UTILITY</div>
+                  </div>
+
+                  <p style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.5 }}>
+                    Kirim simulasi data click langsung dari sistem untuk menguji jalannya animasi visual proyektor dan chime.
+                  </p>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: 8, marginTop: 4 }}>
+                    <label style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase', color: 'var(--t-text-muted)', letterSpacing: '0.5px' }}>Nama / No. Kursi Simulasi</label>
+                    <input
+                      type="text"
+                      placeholder="Contoh: Meja 5, Budi, dll."
+                      value={simulateName}
+                      onChange={(e) => setSimulateName(e.target.value)}
+                      style={{
+                        width: '100%',
+                        padding: '10px 12px',
+                        background: 'rgba(255, 255, 255, 0.03)',
+                        border: '1.5px solid rgba(255, 255, 255, 0.12)',
+                        borderRadius: 'var(--radius-sm)',
+                        color: 'var(--color-white)',
+                        fontSize: 15,
+                        fontWeight: 700,
+                        outline: 'none',
+                        transition: 'all 0.2s ease',
+                      }}
+                      onFocus={(e) => {
+                        e.target.style.border = '1.5px solid var(--color-pistachio)';
+                        e.target.style.boxShadow = '0 0 10px rgba(175, 208, 110, 0.2)';
+                      }}
+                      onBlur={(e) => {
+                        e.target.style.border = '1.5px solid rgba(255, 255, 255, 0.12)';
+                        e.target.style.boxShadow = 'none';
+                      }}
+                    />
+                  </div>
+
+                  <button
+                    onClick={handleSimulateTap}
+                    disabled={loading}
+                    className="cyber-button"
+                    style={{ width: '100%', marginTop: 'auto' }}
+                  >
+                    <div className="cyber-inner" style={{ background: 'linear-gradient(180deg, var(--color-pistachio), #000)', borderBottomColor: '#3d5222', color: '#fff', textShadow: '1px 1px #000, 0 0 9px var(--color-pistachio)' }}>
+                      <span>Simulasikan Tap ⚡</span>
+                    </div>
+                  </button>
+                </div>
+                <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                  <div className="t-perf-line" />
+                </div>
+              </div>
+              <div className="t-stub">
+                <div className="t-barcode-container">
+                  <div className="t-barcode" />
+                  <div className="t-barcode-id">CODEX-2-TESTER</div>
+                </div>
+                <div className="t-admit">
+                  <div className="t-admit-text">TAP</div>
+                  <div className="t-admit-num" style={{ fontSize: '1.8em', color: 'var(--color-pistachio)' }}>SIM</div>
+                </div>
+              </div>
             </div>
-
-            <p style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.4 }}>
-              Kirim simulasi data click langsung dari sistem untuk menguji jalannya animasi visual proyektor dan chime.
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-              <label style={{ fontSize: 13, fontWeight: 700, textTransform: 'uppercase' }}>Nama / No. Kursi Simulasi</label>
-              <input
-                type="text"
-                placeholder="Contoh: Meja 5, Budi, dll."
-                value={simulateName}
-                onChange={(e) => setSimulateName(e.target.value)}
-                style={{
-                  width: '100%',
-                  padding: '10px 12px',
-                  background: 'var(--color-bg-dark)',
-                  border: '2px solid var(--color-white)',
-                  borderRadius: 'var(--radius-sm)',
-                  color: 'var(--color-white)',
-                  fontSize: 15,
-                  fontWeight: 700,
-                  outline: 'none',
-                }}
-              />
-            </div>
-
-            <button
-              onClick={handleSimulateTap}
-              disabled={loading}
-              className="action-btn"
-              style={{
-                width: '100%',
-                padding: '14px 18px',
-                fontSize: 14,
-                fontWeight: 700,
-                fontFamily: 'var(--font-heading)',
-                textTransform: 'uppercase',
-                borderRadius: 'var(--radius-sm)',
-                border: '2px solid var(--color-white)',
-                color: 'var(--color-bg-dark)',
-                background: 'var(--color-pistachio)',
-                cursor: loading ? 'not-allowed' : 'pointer',
-                boxShadow: '3px 3px 0px var(--color-white)',
-                transition: 'all 0.15s ease-out',
-                marginTop: 'auto',
-              }}
-            >
-              Simulasikan Tap ⚡
-            </button>
-          </section>
+          </div>
         </div>
 
         {/* Card 3: Reset Count (Destructive action) */}
-        <section
-          style={{
-            background: 'var(--color-card-dark)',
-            border: '2.5px solid #FF5252',
-            borderRadius: 'var(--radius-md)',
-            padding: 28,
-            boxShadow: '4px 4px 0px #FF5252',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#FF5252' }}>
-            <AlertTriangle size={22} />
-            <h2
-              style={{
-                fontFamily: 'var(--font-heading)',
-                fontSize: 18,
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                margin: 0,
-              }}
-            >
-              Zona Destruktif
-            </h2>
+        <div className="ticket-wrapper" style={{ marginTop: 28 }}>
+          <div className="ticket" style={{ '--t-accent': '#FF5252', '--t-accent-glow': 'rgba(255, 82, 82, 0.4)' } as any}>
+            <div className="t-main">
+              <div className="t-content" style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div className="t-header" style={{ marginBottom: 0 }}>
+                  <div className="t-logo" style={{ color: '#FF5252' }}>
+                    <AlertTriangle size={20} />
+                    DANGER ZONE
+                  </div>
+                  <div className="t-type" style={{ color: '#FF5252', borderColor: '#FF5252', boxShadow: '0 0 8px rgba(255, 82, 82, 0.3)' }}>DESTRUCT PASS</div>
+                </div>
+
+                <p style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.5 }}>
+                  Membersihkan seluruh database attendance. Hal ini akan mereset hitungan di layar proyektor kembali menjadi 0 (Kosong) seketika untuk persiapan acara baru.
+                </p>
+
+                <button
+                  onClick={handleResetCount}
+                  disabled={loading}
+                  className="cyber-button"
+                  style={{ display: 'inline-block', width: 'fit-content', marginTop: 8 }}
+                >
+                  <div className="cyber-inner" style={{ background: 'linear-gradient(180deg, #FF5252, #000)', borderBottomColor: '#6a1d1d', color: '#fff', textShadow: '1px 1px #000, 0 0 9px #FF5252' }}>
+                    <span>Reset Semua Data Click</span>
+                  </div>
+                </button>
+              </div>
+              <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                <div className="t-perf-line" />
+              </div>
+            </div>
+            <div className="t-stub">
+              <div className="t-barcode-container">
+                <div className="t-barcode" />
+                <div className="t-barcode-id">CODEX-2-RESET</div>
+              </div>
+              <div className="t-admit">
+                <div className="t-admit-text">WARN</div>
+                <div className="t-admit-num" style={{ fontSize: '1.8em', color: '#FF5252' }}>RST</div>
+              </div>
+            </div>
           </div>
-
-          <p style={{ fontSize: 13, color: 'rgba(255, 255, 255, 0.6)', margin: 0, lineHeight: 1.4 }}>
-            Membersihkan seluruh database attendance. Hal ini akan mereset hitungan di layar proyektor kembali menjadi 0 (Kosong) seketika untuk persiapan acara baru.
-          </p>
-
-          <button
-            onClick={handleResetCount}
-            disabled={loading}
-            className="reset-btn"
-            style={{
-              alignSelf: 'flex-start',
-              padding: '12px 24px',
-              fontSize: 13,
-              fontWeight: 700,
-              fontFamily: 'var(--font-heading)',
-              textTransform: 'uppercase',
-              borderRadius: 'var(--radius-sm)',
-              border: '2px solid #FF5252',
-              color: '#FF5252',
-              background: 'transparent',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              transition: 'all 0.15s ease-out',
-            }}
-          >
-            Reset Semua Data Click
-          </button>
-        </section>
+        </div>
       </div>
 
       <ConfirmModal
@@ -595,20 +580,8 @@ export default function AdminDashboardPage() {
 
       <style jsx>{`
         .logout-btn:hover {
-          background-color: var(--color-white) !important;
-          color: var(--color-bg-dark) !important;
-        }
-        .action-btn:hover:not(:disabled) {
-          transform: translate(-1px, -1px);
-          box-shadow: 4px 4px 0px var(--color-white) !important;
-        }
-        .action-btn:active:not(:disabled) {
-          transform: translate(1px, 1px);
-          box-shadow: 2px 2px 0px var(--color-white) !important;
-        }
-        .reset-btn:hover:not(:disabled) {
-          background-color: #FF5252 !important;
-          color: var(--color-bg-dark) !important;
+          background-color: rgba(255, 255, 255, 0.1) !important;
+          border-color: rgba(255, 255, 255, 0.4) !important;
         }
       `}</style>
     </main>

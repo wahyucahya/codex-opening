@@ -364,10 +364,9 @@ export default function LayarPage() {
                 style={{
                   padding: '10px 18px',
                   borderRadius: 'var(--radius-sm)',
-                  background: 'var(--color-card-dark)',
-                  border: '2px solid var(--color-white)',
-                  boxShadow: '3px 3px 0px var(--color-white)',
-                  color: 'var(--color-white)',
+                  background: 'rgba(255, 255, 255, 0.02)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  color: 'rgba(255, 255, 255, 0.8)',
                   display: 'flex',
                   alignItems: 'center',
                   gap: 8,
@@ -375,7 +374,7 @@ export default function LayarPage() {
                   cursor: 'pointer',
                   fontWeight: 700,
                   textTransform: 'uppercase',
-                  transition: 'all 0.15s ease-out',
+                  transition: 'all 0.2s ease',
                 }}
               >
                 <Maximize size={16} />
@@ -397,10 +396,9 @@ export default function LayarPage() {
             right: 40,
             padding: '10px 18px',
             borderRadius: 'var(--radius-sm)',
-            background: 'var(--color-card-dark)',
-            border: '2px solid var(--color-white)',
-            boxShadow: '3px 3px 0px var(--color-white)',
-            color: 'var(--color-white)',
+            background: 'rgba(255, 255, 255, 0.02)',
+            border: '1px solid rgba(255, 255, 255, 0.15)',
+            color: 'rgba(255, 255, 255, 0.8)',
             display: 'flex',
             alignItems: 'center',
             gap: 8,
@@ -409,7 +407,7 @@ export default function LayarPage() {
             fontWeight: 700,
             textTransform: 'uppercase',
             zIndex: 100,
-            transition: 'all 0.15s ease-out',
+            transition: 'all 0.2s ease',
           }}
         >
           <Maximize size={16} />
@@ -591,21 +589,21 @@ export default function LayarPage() {
             style={{
               fontFamily: 'var(--font-heading)',
               textTransform: 'uppercase',
-              fontSize: '1.2rem',
-              fontWeight: 700,
-              color: 'var(--color-bg-dark)',
+              fontSize: '1.1rem',
+              fontWeight: 900,
+              color: 'var(--color-carolina-blue)',
               display: 'flex',
               alignItems: 'center',
               gap: 8,
-              background: 'var(--color-carolina-blue)',
+              background: 'rgba(135, 174, 206, 0.1)',
               padding: '8px 24px',
-              borderRadius: 'var(--radius-sm)',
-              border: '2.5px solid var(--color-white)',
-              boxShadow: '3px 3px 0px var(--color-white)',
-              transform: 'rotate(-1deg)',
+              borderRadius: '99px',
+              border: '1.5px solid var(--color-carolina-blue)',
+              boxShadow: '0 0 15px rgba(135, 174, 206, 0.25)',
+              letterSpacing: '1px',
             }}
           >
-            {percent >= 100 && <Trophy size={20} style={{ color: 'var(--color-bg-dark)' }} />}
+            {percent >= 100 && <Trophy size={18} style={{ color: 'var(--color-carolina-blue)' }} />}
             <span>{percent.toFixed(0)}% TERPENUHI</span>
           </div>
         </div>
@@ -784,14 +782,9 @@ export default function LayarPage() {
           animation: pulseGlow 4s ease-in-out infinite;
         }
         .header-btn:hover {
-          background-color: var(--color-pistachio) !important;
-          color: var(--color-bg-dark) !important;
-          transform: translate(-1px, -1px);
-          box-shadow: 4px 4px 0px var(--color-white) !important;
-        }
-        .header-btn:active {
-          transform: translate(1px, 1px);
-          box-shadow: 2px 2px 0px var(--color-white) !important;
+          background-color: rgba(255, 255, 255, 0.08) !important;
+          border-color: rgba(255, 255, 255, 0.4) !important;
+          color: #fff !important;
         }
       `}</style>
     </main>

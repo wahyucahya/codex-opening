@@ -50,139 +50,103 @@ export default function AdminLoginPage() {
         padding: 24,
       }}
     >
-      <div
-        className="neobrutalist-card"
-        style={{
-          width: '100%',
-          maxWidth: 400,
-          background: 'var(--color-card-dark)',
-          border: '2.5px solid var(--color-white)',
-          borderRadius: 'var(--radius-md)',
-          padding: '40px 24px',
-          boxShadow: 'var(--shadow-organic)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 24,
-        }}
-      >
-        <div
-          style={{
-            width: 60,
-            height: 60,
-            borderRadius: 'var(--radius-sm)',
-            background: 'var(--color-carolina-blue)',
-            border: '2px solid var(--color-white)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--color-bg-dark)',
-            boxShadow: '3px 3px 0px var(--color-white)',
-          }}
-        >
-          <Lock size={28} />
-        </div>
+      <div className="ticket-wrapper" style={{ maxWidth: 400, width: '100%' }}>
+        <div className="ticket" style={{ '--t-accent': 'var(--color-carolina-blue)', '--t-accent-glow': 'rgba(135, 174, 206, 0.4)' } as any}>
+          <div className="t-main">
+            <div className="t-content">
+              <div className="t-header">
+                <div className="t-logo">
+                  <Lock size={20} style={{ color: 'var(--color-carolina-blue)' }} />
+                  SECURITY
+                </div>
+                <div className="t-type">ADMIN ACCESS</div>
+              </div>
+              <div className="t-title" style={{ fontSize: '1.8rem' }}>SYSTEM<br />PANEL</div>
+              <div className="t-subtitle" style={{ marginBottom: '1.5em' }}>
+                Masukkan kata sandi admin untuk mengakses kontrol sistem.
+              </div>
 
-        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 8 }}>
-          <h1
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: 26,
-              fontWeight: 700,
-              textTransform: 'uppercase',
-              margin: 0,
-              color: 'var(--color-white)',
-            }}
-          >
-            Admin Panel
-          </h1>
-          <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: 13, margin: 0 }}>
-            Masukkan kata sandi admin untuk mengakses kontrol sistem.
-          </p>
-        </div>
+              <form onSubmit={handleLogin} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <input
+                    type="password"
+                    placeholder="Kata Sandi Admin"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '14px 16px',
+                      fontSize: 15,
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      color: 'var(--color-white)',
+                      border: '1.5px solid rgba(255, 255, 255, 0.12)',
+                      borderRadius: 'var(--radius-sm)',
+                      outline: 'none',
+                      transition: 'all 0.25s ease',
+                      textAlign: 'center',
+                      letterSpacing: password ? '3px' : 'normal',
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.border = '1.5px solid var(--color-carolina-blue)';
+                      e.target.style.boxShadow = '0 0 12px rgba(135, 174, 206, 0.25)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.border = '1.5px solid rgba(255, 255, 255, 0.12)';
+                      e.target.style.boxShadow = 'none';
+                    }}
+                  />
+                </div>
 
-        <form onSubmit={handleLogin} style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-            <input
-              type="password"
-              placeholder="Kata Sandi Admin"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                fontSize: 15,
-                background: 'var(--color-bg-dark)',
-                color: 'var(--color-white)',
-                border: '2px solid var(--color-white)',
-                borderRadius: 'var(--radius-sm)',
-                outline: 'none',
-                boxShadow: 'inset 2px 2px 0px rgba(0,0,0,0.5)',
-              }}
-            />
-          </div>
+                {error && (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 8,
+                      color: '#FF5252',
+                      fontSize: 13,
+                      fontWeight: 600,
+                      border: '1.5px solid rgba(255, 82, 82, 0.3)',
+                      padding: '10px 12px',
+                      borderRadius: 'var(--radius-sm)',
+                      background: 'rgba(255, 82, 82, 0.05)',
+                    }}
+                  >
+                    <AlertCircle size={16} />
+                    <span>{error}</span>
+                  </div>
+                )}
 
-          {error && (
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: 8,
-                color: '#FF5252',
-                fontSize: 13,
-                fontWeight: 600,
-                border: '1.5px solid #FF5252',
-                padding: '10px 12px',
-                borderRadius: 'var(--radius-sm)',
-                background: 'rgba(255, 82, 82, 0.05)',
-              }}
-            >
-              <AlertCircle size={16} />
-              <span>{error}</span>
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="cyber-button"
+                  style={{ width: '100%', marginTop: 8 }}
+                >
+                  <div className="cyber-inner" style={{ background: 'linear-gradient(180deg, var(--color-fern-green), #000)', borderBottomColor: '#2b4412' }}>
+                    <span>{loading ? 'Masuk...' : 'Masuk Admin'}</span>
+                    <ArrowRight size={18} />
+                  </div>
+                </button>
+              </form>
             </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="neobrutalist-btn"
-            style={{
-              width: '100%',
-              padding: '16px 20px',
-              fontSize: 16,
-              fontWeight: 700,
-              fontFamily: 'var(--font-heading)',
-              textTransform: 'uppercase',
-              borderRadius: 'var(--radius-sm)',
-              border: '2.5px solid var(--color-white)',
-              color: 'var(--color-bg-dark)',
-              background: 'var(--color-pistachio)',
-              cursor: loading ? 'not-allowed' : 'pointer',
-              boxShadow: '4px 4px 0px var(--color-white)',
-              transition: 'all 0.15s ease-out',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-            }}
-          >
-            <span>{loading ? 'Masuk...' : 'Masuk Admin'}</span>
-            <ArrowRight size={18} />
-          </button>
-        </form>
+            <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+              <div className="t-perf-line" />
+            </div>
+          </div>
+          <div className="t-stub">
+            <div className="t-barcode-container">
+              <div className="t-barcode" />
+              <div className="t-barcode-id">CODEX-2-SECURE</div>
+            </div>
+            <div className="t-admit">
+              <div className="t-admit-text">ROLE</div>
+              <div className="t-admit-num" style={{ fontSize: '1.8em', color: 'var(--color-carolina-blue)' }}>SEC</div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <style jsx>{`
-        .neobrutalist-btn:hover:not(:disabled) {
-          transform: translate(-2px, -2px);
-          box-shadow: 6px 6px 0px var(--color-white) !important;
-        }
-        .neobrutalist-btn:active:not(:disabled) {
-          transform: translate(2px, 2px);
-          box-shadow: 2px 2px 0px var(--color-white) !important;
-        }
-      `}</style>
     </main>
   );
 }

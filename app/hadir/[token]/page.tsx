@@ -170,15 +170,13 @@ export default function HadirPage({ params }: { params: { token: string } }) {
         position: 'relative',
       }}
     >
-      <div className="ticket-wrapper">
+      <div className="ticket-wrapper" style={{ maxWidth: '22em', width: '100%', margin: '0 auto' }}>
         <div className="ticket">
           <div className="t-main">
             <div className="t-content">
               <div className="t-header">
                 <div className="t-logo">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <img src="/logo.svg" alt="CODEX Logo" width={32} height={32} />
                   CODEX
                 </div>
                 <div className="t-type">Codex Pass</div>

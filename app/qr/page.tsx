@@ -109,14 +109,12 @@ export default function QRPage() {
         >
           <Link href="/" style={{ textDecoration: 'none' }}>
             <button
-              className="action-btn"
               style={{
                 padding: '10px 18px',
                 borderRadius: 'var(--radius-sm)',
-                background: 'var(--color-card-dark)',
-                border: '2px solid var(--color-white)',
-                boxShadow: '3px 3px 0px var(--color-white)',
-                color: 'var(--color-white)',
+                background: 'rgba(255, 255, 255, 0.02)',
+                border: '1.5px solid rgba(255, 255, 255, 0.15)',
+                color: 'rgba(255, 255, 255, 0.8)',
                 display: 'flex',
                 alignItems: 'center',
                 gap: 8,
@@ -124,7 +122,15 @@ export default function QRPage() {
                 cursor: 'pointer',
                 fontWeight: 700,
                 textTransform: 'uppercase',
-                transition: 'all 0.15s ease-out',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
               }}
             >
               <ArrowLeft size={16} />
@@ -134,14 +140,12 @@ export default function QRPage() {
 
           <button
             onClick={toggleFullscreen}
-            className="action-btn"
             style={{
               padding: '10px 18px',
               borderRadius: 'var(--radius-sm)',
-              background: 'var(--color-card-dark)',
-              border: '2px solid var(--color-white)',
-              boxShadow: '3px 3px 0px var(--color-white)',
-              color: 'var(--color-white)',
+              background: 'rgba(255, 255, 255, 0.02)',
+              border: '1.5px solid rgba(255, 255, 255, 0.15)',
+              color: 'rgba(255, 255, 255, 0.8)',
               display: 'flex',
               alignItems: 'center',
               gap: 8,
@@ -149,7 +153,15 @@ export default function QRPage() {
               cursor: 'pointer',
               fontWeight: 700,
               textTransform: 'uppercase',
-              transition: 'all 0.15s ease-out',
+              transition: 'all 0.2s ease',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
+              e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.15)';
             }}
           >
             <Maximize size={16} />
@@ -158,159 +170,138 @@ export default function QRPage() {
         </div>
       )}
 
-      {/* Center QR Presenter Card */}
-      <div
-        style={{
-          background: 'var(--color-card-dark)',
-          border: '3px solid var(--color-white)',
-          borderRadius: 'var(--radius-md)',
-          boxShadow: isFullscreen ? 'none' : '10px 10px 0px var(--color-pistachio)',
-          padding: isFullscreen ? '40px 60px' : '40px',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          gap: 28,
-          maxWidth: isFullscreen ? 580 : 480,
-          width: '95%',
-          textAlign: 'center',
-          position: 'relative',
-          zIndex: 2,
-          transition: 'all 0.3s ease-out',
-          transform: 'rotate(-0.5deg)',
-        }}
-      >
-        <div>
-          <span
-            style={{
-              display: 'inline-block',
-              padding: '4px 12px',
-              background: 'var(--color-carolina-blue)',
-              border: '2px solid var(--color-white)',
-              fontSize: 11,
-              fontWeight: 700,
-              color: 'var(--color-bg-dark)',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-              boxShadow: '2px 2px 0px var(--color-white)',
-              marginBottom: 12,
-            }}
-          >
-            Ceremony Participation
-          </span>
-          <h1
-            style={{
-              fontFamily: 'var(--font-heading)',
-              fontSize: isFullscreen ? 36 : 28,
-              fontWeight: 700,
-              margin: 0,
-              color: 'var(--color-white)',
-              textTransform: 'uppercase',
-              lineHeight: 1.2,
-            }}
-          >
-            Scan to Ignite
-          </h1>
-          <p style={{ color: 'rgba(255, 255, 255, 0.7)', fontSize: isFullscreen ? 15 : 13, margin: '8px 0 0 0', lineHeight: 1.5 }}>
-            Silakan pindai kode QR di bawah untuk masuk ke halaman partisipasi dan ikut serta menyalakan logo CODEX secara realtime.
-          </p>
-        </div>
+      {/* Center QR Presenter Card styled as Ticket */}
+      <div className="ticket-wrapper" style={{ maxWidth: isFullscreen ? 580 : 480, width: '95%', margin: '0 auto', zIndex: 2 }}>
+        <div className="ticket" style={{ '--t-accent': 'var(--color-pistachio)', '--t-accent-glow': 'rgba(175, 208, 110, 0.4)' } as any}>
+          <div className="t-main" style={{ padding: isFullscreen ? '40px 60px' : '40px 32px' }}>
+            <div className="t-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 24 }}>
+              <div className="t-header" style={{ width: '100%', marginBottom: 0 }}>
+                <div className="t-logo">
+                  <QrCode size={20} style={{ color: 'var(--color-pistachio)' }} />
+                  GATEWAY
+                </div>
+                <div className="t-type">PARTISIPASI PASS</div>
+              </div>
 
-        {/* QR Code Graphic Wrapper */}
-        <div
-          style={{
-            background: '#ffffff',
-            padding: isFullscreen ? 24 : 16,
-            borderRadius: 'var(--radius-sm)',
-            border: '2.5px solid var(--color-white)',
-            boxShadow: '6px 6px 0px var(--color-white)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            transition: 'all 0.3s ease-out',
-          }}
-        >
-          {qrUrl && (
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=400x400&color=0a0b14&bgcolor=ffffff&data=${encodeURIComponent(qrUrl)}`}
-              alt="Hadir QR Code"
-              style={{
-                width: '100%',
-                maxWidth: isFullscreen ? 360 : 260,
-                aspectRatio: '1/1',
-                display: 'block',
-              }}
-            />
-          )}
-        </div>
+              <div>
+                <h1
+                  style={{
+                    fontFamily: 'var(--font-heading)',
+                    fontSize: isFullscreen ? 36 : 28,
+                    fontWeight: 900,
+                    margin: 0,
+                    color: 'var(--color-white)',
+                    textTransform: 'uppercase',
+                    lineHeight: 1.2,
+                  }}
+                >
+                  Scan to Ignite
+                </h1>
+                <p style={{ color: 'rgba(255, 255, 255, 0.6)', fontSize: isFullscreen ? 15 : 13, margin: '8px 0 0 0', lineHeight: 1.5 }}>
+                  Silakan pindai kode QR di bawah untuk masuk ke halaman partisipasi dan ikut serta menyalakan logo CODEX secara realtime.
+                </p>
+              </div>
 
-        {/* URL and copy tools */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: 8,
-              background: 'rgba(255, 255, 255, 0.03)',
-              border: '1.5px solid rgba(255, 255, 255, 0.1)',
-              borderRadius: 'var(--radius-sm)',
-              padding: '8px 12px',
-            }}
-          >
-            <span
-              style={{
-                fontSize: isFullscreen ? 14 : 12,
-                fontFamily: 'var(--font-body)',
-                color: 'var(--color-pistachio)',
-                fontWeight: 700,
-                wordBreak: 'break-all',
-                flex: 1,
-              }}
-            >
-              {qrUrl}
-            </span>
-            {!isFullscreen && (
-              <button
-                onClick={handleCopy}
+              {/* QR Code Graphic Wrapper */}
+              <div
                 style={{
-                  background: 'none',
-                  border: 'none',
-                  color: 'rgba(255, 255, 255, 0.6)',
-                  cursor: 'pointer',
-                  padding: 4,
+                  background: '#ffffff',
+                  padding: isFullscreen ? 24 : 16,
+                  borderRadius: 'var(--radius-sm)',
+                  border: '1.5px solid var(--color-pistachio)',
+                  boxShadow: '0 0 25px rgba(175, 208, 110, 0.25)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transition: 'var(--transition-fast)',
+                  transition: 'all 0.3s ease-out',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-white)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)')}
-                title="Salin Tautan"
               >
-                {copied ? <Check size={16} style={{ color: 'var(--color-pistachio)' }} /> : <Copy size={16} />}
-              </button>
-            )}
+                {qrUrl && (
+                  <img
+                    src={`https://api.qrserver.com/v1/create-qr-code/?size=400x400&color=0a0b14&bgcolor=ffffff&data=${encodeURIComponent(qrUrl)}`}
+                    alt="Hadir QR Code"
+                    style={{
+                      width: '100%',
+                      maxWidth: isFullscreen ? 360 : 260,
+                      aspectRatio: '1/1',
+                      display: 'block',
+                    }}
+                  />
+                )}
+              </div>
+
+              {/* URL and copy tools */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8, width: '100%' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: 8,
+                    background: 'rgba(255, 255, 255, 0.03)',
+                    border: '1.5px solid rgba(255, 255, 255, 0.1)',
+                    borderRadius: 'var(--radius-sm)',
+                    padding: '8px 12px',
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: isFullscreen ? 14 : 12,
+                      fontFamily: 'var(--font-body)',
+                      color: 'var(--color-pistachio)',
+                      fontWeight: 700,
+                      wordBreak: 'break-all',
+                      flex: 1,
+                      textAlign: 'left',
+                    }}
+                  >
+                    {qrUrl}
+                  </span>
+                  {!isFullscreen && (
+                    <button
+                      onClick={handleCopy}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'rgba(255, 255, 255, 0.6)',
+                        cursor: 'pointer',
+                        padding: 4,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        transition: 'var(--transition-fast)',
+                      }}
+                      onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-white)')}
+                      onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.6)')}
+                      title="Salin Tautan"
+                    >
+                      {copied ? <Check size={16} style={{ color: 'var(--color-pistachio)' }} /> : <Copy size={16} />}
+                    </button>
+                  )}
+                </div>
+                {isFullscreen && (
+                  <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
+                    Tekan ESC untuk keluar dari layar penuh
+                  </span>
+                )}
+              </div>
+            </div>
+            <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+              <div className="t-perf-line" />
+            </div>
           </div>
-          {isFullscreen && (
-            <span style={{ fontSize: 12, color: 'rgba(255, 255, 255, 0.4)' }}>
-              Tekan ESC untuk keluar dari layar penuh
-            </span>
-          )}
+          <div className="t-stub" style={{ padding: isFullscreen ? '24px 60px' : '20px 32px' }}>
+            <div className="t-barcode-container">
+              <div className="t-barcode" />
+              <div className="t-barcode-id">CODEX-2-HADIR</div>
+            </div>
+            <div className="t-admit">
+              <div className="t-admit-text">GATE</div>
+              <div className="t-admit-num" style={{ fontSize: '1.8em', color: 'var(--color-pistachio)' }}>QR</div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <style jsx>{`
-        .action-btn:hover {
-          background-color: var(--color-pistachio) !important;
-          color: var(--color-bg-dark) !important;
-          transform: translate(-1px, -1px);
-          box-shadow: 4px 4px 0px var(--color-white) !important;
-        }
-        .action-btn:active {
-          transform: translate(1px, 1px);
-          box-shadow: 2px 2px 0px var(--color-white) !important;
-        }
-      `}</style>
     </main>
   );
 }

@@ -53,20 +53,20 @@ export default function Home() {
         }}
       >
         <div>
-          {/* Asymmetric Badge */}
+          {/* Cyber Capsule Badge */}
           <span
             style={{
               display: 'inline-block',
               padding: '6px 16px',
-              background: 'var(--color-carolina-blue)',
-              border: '2px solid var(--color-white)',
+              background: 'rgba(135, 174, 206, 0.1)',
+              border: '1px solid var(--color-carolina-blue)',
+              borderRadius: '99px',
               fontSize: 12,
               fontWeight: 700,
-              color: 'var(--color-bg-dark)',
+              color: 'var(--color-carolina-blue)',
               textTransform: 'uppercase',
-              letterSpacing: '1px',
-              transform: 'rotate(-2deg)',
-              boxShadow: '2px 2px 0px var(--color-white)',
+              letterSpacing: '1.2px',
+              boxShadow: '0 0 10px rgba(135, 174, 206, 0.2)',
               marginBottom: 16,
             }}
           >
@@ -77,7 +77,7 @@ export default function Home() {
             style={{
               fontFamily: 'var(--font-heading)',
               fontSize: 'clamp(2.5rem, 7vw, 4.2rem)',
-              fontWeight: 700,
+              fontWeight: 900,
               margin: '12px 0 16px 0',
               color: 'var(--color-white)',
               textTransform: 'uppercase',
@@ -89,7 +89,7 @@ export default function Home() {
           </h1>
           <p
             style={{
-              color: 'rgba(245, 243, 216, 0.8)',
+              color: 'rgba(245, 243, 216, 0.75)',
               fontSize: 16,
               maxWidth: 520,
               margin: '0 auto',
@@ -101,176 +101,137 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Navigation Cards */}
+        {/* Navigation Cards styled as Tickets */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: 24,
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: 28,
             width: '100%',
           }}
         >
           {/* Card 1: Layar Utama */}
-          <Link href="/layar" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div
-              className="neobrutalist-card"
-              style={{
-                background: 'var(--color-card-dark)',
-                border: '2.5px solid var(--color-white)',
-                borderRadius: 'var(--radius-md)',
-                padding: '32px 24px',
-                textAlign: 'left',
-                transition: 'var(--transition-smooth)',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-                height: '100%',
-                boxShadow: 'var(--shadow-organic)',
-              }}
-            >
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'var(--color-carolina-blue)',
-                  border: '2px solid var(--color-white)',
-                  color: 'var(--color-bg-dark)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '2px 2px 0px var(--color-white)',
-                }}
-              >
-                <ScreenShare size={24} />
+          <Link href="/layar" style={{ textDecoration: 'none', color: 'inherit' }} className="ticket-wrapper">
+            <div className="ticket" style={{ '--t-accent': 'var(--color-carolina-blue)', '--t-accent-glow': 'rgba(135, 174, 206, 0.4)' } as any}>
+              <div className="t-main">
+                <div className="t-content">
+                  <div className="t-header">
+                    <div className="t-logo">
+                      <ScreenShare size={20} />
+                      SCREEN
+                    </div>
+                    <div className="t-type">PROJECTION PASS</div>
+                  </div>
+                  <div className="t-title">LAYAR<br />PROYEKTOR</div>
+                  <div className="t-subtitle">Tampilan visual utama CODEX</div>
+                  <div className="t-details">
+                    <div className="t-detail-item">
+                      <span className="t-label">Mode</span>
+                      <span className="t-value">Liquid Fluid</span>
+                    </div>
+                    <div className="t-detail-item">
+                      <span className="t-label">Output</span>
+                      <span className="t-value">Projector</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                  <div className="t-perf-line" />
+                </div>
               </div>
-              <div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    margin: '0 0 8px 0',
-                    fontSize: 20,
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    color: 'var(--color-white)',
-                  }}
-                >
-                  Layar Proyektor
-                </h3>
-                <p style={{ margin: 0, fontSize: 14, color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.5 }}>
-                  Tampilan visual logo utama CODEX yang akan terisi secara bertahap menggunakan cairan berwarna asli logo.
-                </p>
+              <div className="t-stub">
+                <div className="t-barcode-container">
+                  <div className="t-barcode" />
+                  <div className="t-barcode-id">CODEX-2-PROJ</div>
+                </div>
+                <div className="t-admit">
+                  <div className="t-admit-text">OPEN</div>
+                  <div className="t-admit-num" style={{ fontSize: '1.8em', fontWeight: 700 }}>➔</div>
+                </div>
               </div>
             </div>
           </Link>
 
           {/* Card 2: Halaman HP Peserta */}
-          <Link href="/hadir/umum" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div
-              className="neobrutalist-card"
-              style={{
-                background: 'var(--color-card-dark)',
-                border: '2.5px solid var(--color-white)',
-                borderRadius: 'var(--radius-md)',
-                padding: '32px 24px',
-                textAlign: 'left',
-                transition: 'var(--transition-smooth)',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-                height: '100%',
-                boxShadow: 'var(--shadow-organic)',
-              }}
-            >
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'var(--color-pistachio)',
-                  border: '2px solid var(--color-white)',
-                  color: 'var(--color-bg-dark)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '2px 2px 0px var(--color-white)',
-                }}
-              >
-                <UserCheck size={24} />
+          <Link href="/hadir/umum" style={{ textDecoration: 'none', color: 'inherit' }} className="ticket-wrapper">
+            <div className="ticket" style={{ '--t-accent': 'var(--color-pistachio)', '--t-accent-glow': 'rgba(175, 208, 110, 0.4)' } as any}>
+              <div className="t-main">
+                <div className="t-content">
+                  <div className="t-header">
+                    <div className="t-logo">
+                      <UserCheck size={20} />
+                      HADIR
+                    </div>
+                    <div className="t-type">MEMBER PASS</div>
+                  </div>
+                  <div className="t-title">HALAMAN<br />PESERTA</div>
+                  <div className="t-subtitle">Halaman tap pengirim energi</div>
+                  <div className="t-details">
+                    <div className="t-detail-item">
+                      <span className="t-label">Mode</span>
+                      <span className="t-value">Attendance</span>
+                    </div>
+                    <div className="t-detail-item">
+                      <span className="t-label">Access</span>
+                      <span className="t-value">Public/Seat</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                  <div className="t-perf-line" />
+                </div>
               </div>
-              <div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    margin: '0 0 8px 0',
-                    fontSize: 20,
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    color: 'var(--color-white)',
-                  }}
-                >
-                  Halaman Partisipasi
-                </h3>
-                <p style={{ margin: 0, fontSize: 14, color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.5 }}>
-                  Simulasi halaman HP peserta. Scan QR atau klik tombol untuk ikut berpartisipasi menyalakan logo CODEX secara realtime.
-                </p>
+              <div className="t-stub">
+                <div className="t-barcode-container">
+                  <div className="t-barcode" />
+                  <div className="t-barcode-id">CODEX-2-HADIR</div>
+                </div>
+                <div className="t-admit">
+                  <div className="t-admit-text">OPEN</div>
+                  <div className="t-admit-num" style={{ fontSize: '1.8em', fontWeight: 700 }}>➔</div>
+                </div>
               </div>
             </div>
           </Link>
 
-          {/* Card 3: Tampilan Kode QR (Dedicated QR Page) */}
-          <Link href="/qr" style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div
-              className="neobrutalist-card"
-              style={{
-                background: 'var(--color-card-dark)',
-                border: '2.5px solid var(--color-white)',
-                borderRadius: 'var(--radius-md)',
-                padding: '32px 24px',
-                textAlign: 'left',
-                transition: 'var(--transition-smooth)',
-                cursor: 'pointer',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 16,
-                height: '100%',
-                boxShadow: 'var(--shadow-organic)',
-              }}
-            >
-              <div
-                style={{
-                  width: 48,
-                  height: 48,
-                  borderRadius: 'var(--radius-sm)',
-                  background: 'var(--color-carolina-blue)',
-                  border: '2px solid var(--color-white)',
-                  color: 'var(--color-bg-dark)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '2px 2px 0px var(--color-white)',
-                }}
-              >
-                <QrCode size={24} />
+          {/* Card 3: Tampilan Kode QR */}
+          <Link href="/qr" style={{ textDecoration: 'none', color: 'inherit' }} className="ticket-wrapper">
+            <div className="ticket" style={{ '--t-accent': 'var(--color-carolina-blue)', '--t-accent-glow': 'rgba(135, 174, 206, 0.4)' } as any}>
+              <div className="t-main">
+                <div className="t-content">
+                  <div className="t-header">
+                    <div className="t-logo">
+                      <QrCode size={20} />
+                      QR CODE
+                    </div>
+                    <div className="t-type">QR ACCESS</div>
+                  </div>
+                  <div className="t-title">QR CODE<br />GATEWAY</div>
+                  <div className="t-subtitle">Tampilan QR Code ukuran besar</div>
+                  <div className="t-details">
+                    <div className="t-detail-item">
+                      <span className="t-label">Target</span>
+                      <span className="t-value">Projection Screen</span>
+                    </div>
+                    <div className="t-detail-item">
+                      <span className="t-label">Scanning</span>
+                      <span className="t-value">Open Invite</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="t-perforation" style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)' }}>
+                  <div className="t-perf-line" />
+                </div>
               </div>
-              <div>
-                <h3
-                  style={{
-                    fontFamily: 'var(--font-heading)',
-                    margin: '0 0 8px 0',
-                    fontSize: 20,
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    color: 'var(--color-white)',
-                  }}
-                >
-                  QR Code Partisipasi
-                </h3>
-                <p style={{ margin: 0, fontSize: 14, color: 'rgba(255, 255, 255, 0.7)', lineHeight: 1.5 }}>
-                  Tampilan khusus kode QR dalam ukuran besar untuk diproyeksikan ke layar agar dipindai oleh peserta agar ikut menyalakan logo CODEX.
-                </p>
+              <div className="t-stub">
+                <div className="t-barcode-container">
+                  <div className="t-barcode" />
+                  <div className="t-barcode-id">CODEX-2-QRCODE</div>
+                </div>
+                <div className="t-admit">
+                  <div className="t-admit-text">OPEN</div>
+                  <div className="t-admit-num" style={{ fontSize: '1.8em', fontWeight: 700 }}>➔</div>
+                </div>
               </div>
             </div>
           </Link>
@@ -279,7 +240,7 @@ export default function Home() {
         {/* Footer Info */}
         <div
           style={{
-            marginTop: 16,
+            marginTop: 24,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -287,7 +248,7 @@ export default function Home() {
             gap: 24,
             fontSize: 13,
             fontWeight: 600,
-            color: 'rgba(255, 255, 255, 0.5)',
+            color: 'rgba(255, 255, 255, 0.4)',
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -301,13 +262,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Local Hover styling using styled-jsx */}
-      <style jsx>{`
-        .neobrutalist-card:hover {
-          transform: translate(-4px, -4px);
-          box-shadow: 8px 8px 0px var(--color-pistachio) !important;
-        }
-      `}</style>
     </main>
   );
 }
