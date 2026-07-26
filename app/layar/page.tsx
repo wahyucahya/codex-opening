@@ -210,13 +210,13 @@ export default function LayarPage() {
           ...defaults,
           particleCount,
           origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-          colors: ['#437118', '#afd06e', '#87aece', '#202c60']
+          colors: ['#202c60', '#f8ca07', '#8facca', '#ffa200']
         });
         confetti({
           ...defaults,
           particleCount,
           origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-          colors: ['#437118', '#afd06e', '#87aece', '#202c60']
+          colors: ['#202c60', '#f8ca07', '#8facca', '#ffa200']
         });
       }, 250);
 

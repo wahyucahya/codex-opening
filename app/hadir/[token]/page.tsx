@@ -127,7 +127,7 @@ export default function HadirPage({ params }: { params: { token: string } }) {
         particleCount: 40,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#437118', '#afd06e', '#87aece']
+        colors: ['#202c60', '#f8ca07', '#8facca']
       });
 
       // Reset ke status idle setelah 1 detik agar bisa diklik lagi
@@ -188,10 +188,10 @@ export default function HadirPage({ params }: { params: { token: string } }) {
                   <span className="t-label">Name</span><span className="t-value">{displayName}</span>
                 </div>
                 <div className="t-detail-item">
-                  <span className="t-label">Date</span><span className="t-value">July 26, 2026</span>
+                  <span className="t-label">Date</span><span className="t-value">August 5, 2026</span>
                 </div>
                 <div className="t-detail-item">
-                  <span className="t-label">Venue</span><span className="t-value">Neon Nexus Arena</span>
+                  <span className="t-label">Venue</span><span className="t-value">Putra Bangsa University Hall</span>
                 </div>
                 <div className="t-detail-item">
                   <span className="t-label">Gateway</span><span className="t-value">{params.token === 'umum' ? 'Public' : params.token}</span>
@@ -248,8 +248,8 @@ export default function HadirPage({ params }: { params: { token: string } }) {
         .ticket-wrapper {
           --t-bg: #1e1e24;
           --t-bg-light: #2b2b36;
-          --t-accent: #7c3aed;
-          --t-accent-glow: rgba(124, 58, 237, 0.5);
+          --t-accent: #f8ca07;
+          --t-accent-glow: rgba(248, 202, 7, 0.5);
           --t-text-main: #f8fafc;
           --t-text-muted: #94a3b8;
           font-size: 14px;
@@ -336,10 +336,10 @@ export default function HadirPage({ params }: { params: { token: string } }) {
           right: 0;
           bottom: 0;
           background-image: linear-gradient(
-              rgba(124, 58, 237, 0.15) 1px,
+              rgba(248, 202, 7, 0.08) 1px,
               transparent 1px
             ),
-            linear-gradient(90deg, rgba(124, 58, 237, 0.15) 1px, transparent 1px);
+            linear-gradient(90deg, rgba(248, 202, 7, 0.08) 1px, transparent 1px);
           background-size: 2em 2em;
           opacity: 0.6;
           z-index: 0;

@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap');
 
 :root {
-  /* --- Palette Warna Utama (Tech Jungle Muted - Dark Version) --- */
-  --color-fern-green: #437118;     /* Warna primer (tombol utama, brand) */
-  --color-pistachio: #afd06e;      /* Warna sekunder/hover (sorotan, hover state) */
+  /* --- Palette Warna Utama (Logo CODEX Inspired - Dark Version) --- */
+  --color-fern-green: #202c60;     /* Warna primer (Deep Blue dari logo) */
+  --color-pistachio: #f8ca07;      /* Warna sekunder/hover (Golden Yellow dari logo) */
   --color-beige: #f5f3d8;          /* Light beige text / accents */
-  --color-carolina-blue: #87aece;  /* Warna aksen teknologi */
-  --color-delft-blue: #1d2a62;     /* Warna biru tua kontras */
+  --color-carolina-blue: #8facca;  /* Warna aksen teknologi (Light Blue dari logo) */
+  --color-delft-blue: #141b3d;     /* Biru tua pekat kontras */
 
   /* --- Variasi Warna Tambahan --- */
   --color-white: #ffffff;
@@ -74,7 +74,7 @@ body::before {
   --t-bg: #121625;
   --t-bg-light: #1c2136;
   --t-accent: var(--color-carolina-blue);
-  --t-accent-glow: rgba(135, 174, 206, 0.4);
+  --t-accent-glow: rgba(143, 172, 202, 0.4);
   --t-text-main: #f8fafc;
   --t-text-muted: #94a3b8;
   font-size: 14px;
@@ -148,8 +148,8 @@ body::before {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: linear-gradient(rgba(135, 174, 206, 0.06) 1px, transparent 1px),
-                    linear-gradient(90deg, rgba(135, 174, 206, 0.06) 1px, transparent 1px);
+  background-image: linear-gradient(rgba(143, 172, 202, 0.06) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(143, 172, 202, 0.06) 1px, transparent 1px);
   background-size: 2em 2em;
   opacity: 0.6;
   z-index: 0;
