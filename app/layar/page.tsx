@@ -102,37 +102,7 @@ export default function LayarPage() {
     };
   }, []);
 
-  // Play audio chime using Web Audio API (completely self-contained, no files needed)
-  const playChime = () => {
-    if (!soundEnabled || typeof window === 'undefined') return;
-    try {
-      const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-      if (!AudioContext) return;
-      const ctx = new AudioContext();
-      
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(587.33, ctx.currentTime); // D5
-      osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 0.1); // A5
-      osc.frequency.exponentialRampToValueAtTime(1174.66, ctx.currentTime + 0.25); // D6
-      
-      gain.gain.setValueAtTime(0.2, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.8);
-      
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + 0.85);
-    } catch (err) {
-      console.error('Audio chime failed:', err);
-    }
-  };
-
   const handleNewAttendance = (insertedToken: string) => {
-    playChime();
     
     // Hilangkan suffix UUID dari token untuk mendapatkan nama/id asli
     const cleanToken = insertedToken.includes('_') 

@@ -3,8 +3,167 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabaseClient';
 import { useAttendanceCount } from '@/hooks/useAttendanceCount';
-import { Bot, CheckCircle2, AlertCircle, Zap } from 'lucide-react';
+import { Bot, CheckCircle2, AlertCircle, Zap, Volume2, VolumeX } from 'lucide-react';
 import confetti from 'canvas-confetti';
+
+const getDeviceSound = (token: string): string => {
+  if (typeof window === 'undefined') return 'chime';
+  
+  const saved = localStorage.getItem('codex_device_sound');
+  if (saved) return saved;
+  
+  const SOUNDS = ['chime', 'zap', 'retro', 'powerup', 'sparkle'];
+  if (token && token !== 'umum') {
+    let hash = 0;
+    for (let i = 0; i < token.length; i++) {
+      hash = token.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    const index = Math.abs(hash) % SOUNDS.length;
+    const assignedSound = SOUNDS[index];
+    localStorage.setItem('codex_device_sound', assignedSound);
+    return assignedSound;
+  }
+  
+  const randomIndex = Math.floor(Math.random() * SOUNDS.length);
+  const assignedSound = SOUNDS[randomIndex];
+  localStorage.setItem('codex_device_sound', assignedSound);
+  return assignedSound;
+};
+
+const SOUND_DETAILS: Record<string, { icon: string; name: string }> = {
+  chime: { icon: '🔔', name: 'Chime' },
+  zap: { icon: '⚡', name: 'Laser' },
+  retro: { icon: '🪙', name: 'Retro' },
+  powerup: { icon: '📈', name: 'Power Up' },
+  sparkle: { icon: '✨', name: 'Sparkle' },
+};
+
+const playAudioEffect = (soundId: string) => {
+  if (typeof window === 'undefined') return;
+  try {
+    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
+    if (!AudioContext) return;
+    const ctx = new AudioContext();
+    const now = ctx.currentTime;
+    
+    switch (soundId) {
+      case 'chime': {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, now); // D5
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.1); // A5
+        osc.frequency.exponentialRampToValueAtTime(1174.66, now + 0.25); // D6
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
+        osc.start(now);
+        osc.stop(now + 0.85);
+        break;
+      }
+      case 'zap': {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        const filter = ctx.createBiquadFilter();
+        
+        osc.type = 'sawtooth';
+        filter.type = 'lowpass';
+        
+        osc.connect(filter);
+        filter.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc.frequency.setValueAtTime(1000, now);
+        osc.frequency.exponentialRampToValueAtTime(80, now + 0.25);
+        
+        filter.frequency.setValueAtTime(1800, now);
+        filter.frequency.exponentialRampToValueAtTime(200, now + 0.25);
+        
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        
+        osc.start(now);
+        osc.stop(now + 0.35);
+        break;
+      }
+      case 'retro': {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'square';
+        
+        osc.frequency.setValueAtTime(987.77, now); // B5
+        osc.frequency.setValueAtTime(1318.51, now + 0.08); // E6
+        
+        gain.gain.setValueAtTime(0.06, now);
+        gain.gain.setValueAtTime(0.06, now + 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+        
+        osc.start(now);
+        osc.stop(now + 0.35);
+        break;
+      }
+      case 'powerup': {
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc1.frequency.setValueAtTime(196.00, now); // G3
+        osc1.frequency.setValueAtTime(261.63, now + 0.08); // C4
+        osc1.frequency.setValueAtTime(329.63, now + 0.16); // E4
+        osc1.frequency.linearRampToValueAtTime(783.99, now + 0.32); // G5
+        
+        osc2.frequency.setValueAtTime(198, now);
+        osc2.frequency.setValueAtTime(263.63, now + 0.08);
+        osc2.frequency.setValueAtTime(331.63, now + 0.16);
+        osc2.frequency.linearRampToValueAtTime(785.99, now + 0.32);
+        
+        gain.gain.setValueAtTime(0.15, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 0.5);
+        osc2.stop(now + 0.5);
+        break;
+      }
+      case 'sparkle': {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        
+        osc.frequency.setValueAtTime(523.25, now); // C5
+        osc.frequency.setValueAtTime(659.25, now + 0.05); // E5
+        osc.frequency.setValueAtTime(783.99, now + 0.1); // G5
+        osc.frequency.setValueAtTime(1046.50, now + 0.15); // C6
+        osc.frequency.setValueAtTime(1318.51, now + 0.2); // E6
+        osc.frequency.setValueAtTime(1567.98, now + 0.25); // G6
+        
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+        
+        osc.start(now);
+        osc.stop(now + 0.5);
+        break;
+      }
+      default:
+        break;
+    }
+  } catch (err) {
+    console.error('Audio playback failed:', err);
+  }
+};
 
 /**
  * URL yang dikodekan di QR peserta: https://domain-anda.com/hadir/<token>
@@ -20,6 +179,11 @@ export default function HadirPage({ params }: { params: { token: string } }) {
   const [clickCount, setClickCount] = useState(0);
   const [totalTarget, setTotalTarget] = useState(100);
   const [techFallbackName, setTechFallbackName] = useState('Cyber Guest');
+  
+  // Sound states
+  const [globalSoundEnabled, setGlobalSoundEnabled] = useState(false);
+  const [localSoundEnabled, setLocalSoundEnabled] = useState(true);
+  const [deviceSound, setDeviceSound] = useState('chime');
 
   // Load click count and fallback name from localStorage on mount
   useEffect(() => {
@@ -27,6 +191,14 @@ export default function HadirPage({ params }: { params: { token: string } }) {
     if (saved) {
       setClickCount(parseInt(saved) || 0);
     }
+
+    const savedLocalSound = localStorage.getItem('codex_local_sound');
+    if (savedLocalSound !== null) {
+      setLocalSoundEnabled(savedLocalSound === 'true');
+    }
+
+    const assigned = getDeviceSound(params.token);
+    setDeviceSound(assigned);
 
     const savedFallback = localStorage.getItem('codex_tech_fallback_name');
     if (savedFallback) {
@@ -58,12 +230,13 @@ export default function HadirPage({ params }: { params: { token: string } }) {
       try {
         const { data } = await supabase
           .from('settings')
-          .select('total_target')
+          .select('total_target, sound_enabled')
           .eq('id', 'default')
           .maybeSingle();
 
         if (data) {
           setTotalTarget(data.total_target);
+          setGlobalSoundEnabled(!!data.sound_enabled);
         }
       } catch (err) {
         console.error(err);
@@ -80,6 +253,7 @@ export default function HadirPage({ params }: { params: { token: string } }) {
         (payload) => {
           if (payload.new) {
             setTotalTarget((payload.new as any).total_target);
+            setGlobalSoundEnabled(!!(payload.new as any).sound_enabled);
           }
         }
       )
@@ -93,7 +267,21 @@ export default function HadirPage({ params }: { params: { token: string } }) {
   const { count, ready } = useAttendanceCount(totalTarget);
   const isLimitReached = ready && count >= totalTarget;
 
+  const toggleLocalSound = () => {
+    const nextVal = !localSoundEnabled;
+    setLocalSoundEnabled(nextVal);
+    localStorage.setItem('codex_local_sound', nextVal.toString());
+    if (nextVal && globalSoundEnabled) {
+      playAudioEffect(deviceSound);
+    }
+  };
+
   const handlePress = async () => {
+    // Play sound immediately if enabled (specific sound for this device)
+    if (globalSoundEnabled && localSoundEnabled) {
+      playAudioEffect(deviceSound);
+    }
+
     setStatus('loading');
     setErrorMessage('');
 
@@ -225,6 +413,79 @@ export default function HadirPage({ params }: { params: { token: string } }) {
                     <span>{errorMessage || 'Gagal mengirim, silakan coba lagi.'}</span>
                   </div>
                 )}
+
+                {/* Sound Settings Panel */}
+                <div style={{
+                  width: '100%',
+                  marginTop: '0.8em',
+                  padding: '10px 14px',
+                  borderRadius: '12px',
+                  background: 'rgba(255, 255, 255, 0.03)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  boxSizing: 'border-box'
+                }}>
+                  <div style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
+                    gap: '2px'
+                  }}>
+                    <span style={{
+                      fontSize: '0.75em',
+                      textTransform: 'uppercase',
+                      letterSpacing: '0.1em',
+                      color: 'var(--t-text-muted)',
+                      fontWeight: 700
+                    }}>
+                      Sound Effects
+                    </span>
+                    <span style={{
+                      fontSize: '0.7em',
+                      color: 'var(--t-text-muted)',
+                      opacity: 0.8
+                    }}>
+                      Suara Anda: {SOUND_DETAILS[deviceSound]?.icon} {SOUND_DETAILS[deviceSound]?.name}
+                    </span>
+                  </div>
+                  
+                  <button
+                    onClick={toggleLocalSound}
+                    style={{
+                      background: 'rgba(255, 255, 255, 0.03)',
+                      border: '1px solid rgba(255, 255, 255, 0.1)',
+                      color: localSoundEnabled && globalSoundEnabled ? 'var(--t-accent)' : '#ef4444',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      padding: '6px 12px',
+                      borderRadius: '20px',
+                      fontSize: '0.9em',
+                      fontWeight: 700,
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    {(!globalSoundEnabled) ? (
+                      <>
+                        <VolumeX size={14} />
+                        <span style={{ color: '#ff4d4d' }}>Admin Muted</span>
+                      </>
+                    ) : localSoundEnabled ? (
+                      <>
+                        <Volume2 size={14} />
+                        <span>ON</span>
+                      </>
+                    ) : (
+                      <>
+                        <VolumeX size={14} />
+                        <span>MUTE</span>
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </div>
             <div className="t-perforation" style={{position: 'absolute', bottom: 0, left: 0, width: '100%', transform: 'translateY(50%)'}}>
