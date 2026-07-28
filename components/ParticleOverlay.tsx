@@ -29,8 +29,14 @@ interface Particle {
 }
 
 const PARTICLE_SOURCES = [
-  '/particel/ai (1).png',
-  '/particel/bot.png',
+  '/emoji/sticker1.webp',
+  '/emoji/sticker2.webp',
+  '/emoji/sticker3.webp',
+  '/emoji/sticker4.webp',
+  '/emoji/sticker5.webp',
+  '/emoji/sticker6.webp',
+  '/emoji/sticker7.webp',
+  '/emoji/sticker8.webp',
   '/particel/c-.png',
   '/particel/c-sharp.png',
   '/particel/css-3.png',

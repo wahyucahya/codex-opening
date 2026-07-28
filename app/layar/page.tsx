@@ -122,10 +122,14 @@ export default function LayarPage() {
     
     const id = Math.random().toString(36).substring(2, 9);
     const emojis = [
-      '/emoji/feelings.png',
-      '/emoji/laughing.png',
-      '/emoji/robot.png',
-      '/emoji/robot%20(1).png'
+      '/emoji/sticker1.webp',
+      '/emoji/sticker2.webp',
+      '/emoji/sticker3.webp',
+      '/emoji/sticker4.webp',
+      '/emoji/sticker5.webp',
+      '/emoji/sticker6.webp',
+      '/emoji/sticker7.webp',
+      '/emoji/sticker8.webp'
     ];
     const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
 
